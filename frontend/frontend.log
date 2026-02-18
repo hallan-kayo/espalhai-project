@@ -1,0 +1,760 @@
+Warning: Running a server with --disable-host-check is a security risk. See https://medium.com/webpack/webpack-dev-server-middleware-security-issues-1489d950874a for more information.
+- Generating browser application bundles (phase: setup)...
+✔ Browser application bundle generation complete.
+
+Initial chunk files   | Names         |  Raw size
+vendor.js             | vendor        |   3.04 MB | 
+polyfills.js          | polyfills     | 266.52 kB | 
+styles.css, styles.js | styles        | 154.05 kB | 
+main.js               | main          |  69.14 kB | 
+runtime.js            | runtime       |   6.53 kB | 
+
+                      | Initial total |   3.53 MB
+
+Build at: 2026-02-14T16:57:32.864Z - Hash: c00593343fca407c - Time: 4082ms
+
+Warning: /home/ubuntu/espalhai/frontend/src/app/services/chat.service.ts depends on '@stomp/stompjs'. CommonJS or AMD dependencies can cause optimization bailouts.
+For more info see: https://angular.io/guide/build#configuring-commonjs-dependencies
+
+Warning: /home/ubuntu/espalhai/frontend/src/app/services/chat.service.ts depends on 'sockjs-client'. CommonJS or AMD dependencies can cause optimization bailouts.
+For more info see: https://angular.io/guide/build#configuring-commonjs-dependencies
+
+
+
+** Angular Live Development Server is listening on 0.0.0.0:4200, open your browser on http://localhost:4200/ **
+
+
+✔ Compiled successfully.
+✔ Browser application bundle generation complete.
+
+Initial chunk files | Names   | Raw size
+runtime.js          | runtime |  6.53 kB | 
+
+4 unchanged chunks
+
+Build at: 2026-02-14T16:57:33.399Z - Hash: e3b6c4580c53387c - Time: 456ms
+
+✔ Compiled successfully.
+✔ Browser application bundle generation complete.
+
+
+
+5 unchanged chunks
+
+Build at: 2026-02-14T16:59:01.048Z - Hash: e3b6c4580c53387c - Time: 260ms
+
+✔ Compiled successfully.
+✔ Browser application bundle generation complete.
+
+Initial chunk files | Names   | Raw size
+runtime.js          | runtime |  6.53 kB | 
+
+4 unchanged chunks
+
+Build at: 2026-02-14T16:59:08.326Z - Hash: d3dddd42649f5091 - Time: 287ms
+
+✔ Compiled successfully.
+✔ Browser application bundle generation complete.
+
+Initial chunk files | Names   | Raw size
+main.js             | main    | 69.09 kB | 
+runtime.js          | runtime |  6.53 kB | 
+
+3 unchanged chunks
+
+Build at: 2026-02-14T16:59:13.674Z - Hash: c28609937633749c - Time: 868ms
+
+✔ Compiled successfully.
+✔ Browser application bundle generation complete.
+
+Initial chunk files | Names   | Raw size
+main.js             | main    | 72.19 kB | 
+runtime.js          | runtime |  6.53 kB | 
+
+3 unchanged chunks
+
+Build at: 2026-02-14T16:59:20.742Z - Hash: d15ec145e2136830 - Time: 663ms
+
+✔ Compiled successfully.
+✔ Browser application bundle generation complete.
+
+
+
+5 unchanged chunks
+
+Build at: 2026-02-14T17:01:11.366Z - Hash: d15ec145e2136830 - Time: 331ms
+
+✔ Compiled successfully.
+✔ Browser application bundle generation complete.
+
+Initial chunk files | Names   | Raw size
+runtime.js          | runtime |  6.53 kB | 
+
+4 unchanged chunks
+
+Build at: 2026-02-14T17:02:48.564Z - Hash: bf21bf80e290fb46 - Time: 489ms
+
+✔ Compiled successfully.
+✔ Browser application bundle generation complete.
+
+Initial chunk files | Names   | Raw size
+main.js             | main    | 72.20 kB | 
+runtime.js          | runtime |  6.53 kB | 
+
+3 unchanged chunks
+
+Build at: 2026-02-14T17:02:53.943Z - Hash: 1be99ee9340add28 - Time: 559ms
+
+✔ Compiled successfully.
+✔ Browser application bundle generation complete.
+
+Initial chunk files | Names   | Raw size
+main.js             | main    | 75.26 kB | 
+runtime.js          | runtime |  6.53 kB | 
+
+3 unchanged chunks
+
+Build at: 2026-02-14T17:03:04.836Z - Hash: d6b4485567cbb2f7 - Time: 772ms
+
+✔ Compiled successfully.
+✔ Browser application bundle generation complete.
+
+Initial chunk files | Names   | Raw size
+main.js             | main    | 76.44 kB | 
+runtime.js          | runtime |  6.53 kB | 
+
+3 unchanged chunks
+
+Build at: 2026-02-14T17:03:11.529Z - Hash: 38240c0ae3d26af0 - Time: 555ms
+
+✔ Compiled successfully.
+✔ Browser application bundle generation complete.
+
+Initial chunk files | Names   | Raw size
+main.js             | main    | 78.68 kB | 
+runtime.js          | runtime |  6.53 kB | 
+
+3 unchanged chunks
+
+Build at: 2026-02-14T17:03:19.447Z - Hash: 3989d51cf889528a - Time: 504ms
+
+✔ Compiled successfully.
+✔ Browser application bundle generation complete.
+
+Initial chunk files | Names   | Raw size
+main.js             | main    | 86.36 kB | 
+runtime.js          | runtime |  6.53 kB | 
+
+3 unchanged chunks
+
+Build at: 2026-02-14T17:03:32.538Z - Hash: e6902f6b6fcde13e - Time: 568ms
+
+✔ Compiled successfully.
+✔ Browser application bundle generation complete.
+
+Initial chunk files | Names   | Raw size
+main.js             | main    | 89.15 kB | 
+runtime.js          | runtime |  6.53 kB | 
+
+3 unchanged chunks
+
+Build at: 2026-02-14T17:03:44.308Z - Hash: 87a96f53f0d4badc - Time: 495ms
+
+✔ Compiled successfully.
+✔ Browser application bundle generation complete.
+
+Initial chunk files | Names   | Raw size
+main.js             | main    | 90.67 kB | 
+runtime.js          | runtime |  6.53 kB | 
+
+3 unchanged chunks
+
+Build at: 2026-02-14T17:17:07.532Z - Hash: ff46df70cfea6935 - Time: 693ms
+
+✔ Compiled successfully.
+✔ Browser application bundle generation complete.
+
+Initial chunk files | Names   | Raw size
+main.js             | main    | 93.86 kB | 
+runtime.js          | runtime |  6.53 kB | 
+
+3 unchanged chunks
+
+Build at: 2026-02-14T17:23:28.853Z - Hash: 3cd1fdca01df2f74 - Time: 570ms
+
+Error: src/app/components/ad-list.component.ts:97:20 - error TS2339: Property 'getCategories' does not exist on type 'AdService'.
+
+97     this.adService.getCategories().subscribe(data => this.categories = data);
+                      ~~~~~~~~~~~~~
+
+
+Error: src/app/components/ad-list.component.ts:97:46 - error TS7006: Parameter 'data' implicitly has an 'any' type.
+
+97     this.adService.getCategories().subscribe(data => this.categories = data);
+                                                ~~~~
+
+
+
+
+✖ Failed to compile.
+✔ Browser application bundle generation complete.
+
+Initial chunk files | Names   | Raw size
+main.js             | main    | 94.02 kB | 
+runtime.js          | runtime |  6.53 kB | 
+
+3 unchanged chunks
+
+Build at: 2026-02-14T17:24:47.128Z - Hash: 2e5e8ff9d34ce964 - Time: 510ms
+
+✔ Compiled successfully.
+✔ Browser application bundle generation complete.
+
+Initial chunk files | Names         | Raw size
+runtime.js          | runtime       |  5.43 kB | 
+styles.css          | styles        |  3.64 kB | 
+
+                    | Initial total |  9.06 kB
+
+Build at: 2026-02-14T21:27:20.013Z - Hash: 8402f179570a483b - Time: 99ms
+
+Error: Module not found: Error: Can't resolve '/home/ubuntu/espalhai/frontend/node_modules/.pnpm/@angular-devkit+build-angular@17.3.17_@angular+compiler-cli@17.3.12_@angular+compiler@1_f1ce2686c3b8a24fc7f99e857e4191af/node_modules/@angular-devkit/build-angular/src/tools/babel/webpack-loader.js' in '/home/ubuntu/espalhai/frontend'
+
+Error: Module not found: Error: Can't resolve '/home/ubuntu/espalhai/frontend/node_modules/.pnpm/@angular-devkit+build-angular@17.3.17_@angular+compiler-cli@17.3.12_@angular+compiler@1_f1ce2686c3b8a24fc7f99e857e4191af/node_modules/@angular-devkit/build-angular/src/tools/babel/webpack-loader.js' in '/home/ubuntu/espalhai/frontend'
+
+Error: Module not found: Error: Can't resolve '/home/ubuntu/espalhai/frontend/node_modules/.pnpm/@angular-devkit+build-angular@17.3.17_@angular+compiler-cli@17.3.12_@angular+compiler@1_f1ce2686c3b8a24fc7f99e857e4191af/node_modules/@angular-devkit/build-angular/src/tools/babel/webpack-loader.js' in '/home/ubuntu/espalhai/frontend'
+
+
+
+✖ Failed to compile.
+✔ Browser application bundle generation complete.
+
+Initial chunk files | Names         | Raw size
+runtime.js          | runtime       | 99 bytes | 
+
+                    | Initial total | 99 bytes
+
+Build at: 2026-02-14T21:27:20.785Z - Hash: 239142d911f54826 - Time: 79ms
+
+Error: Module not found: Error: Can't resolve '/home/ubuntu/espalhai/frontend/node_modules/.pnpm/@angular-devkit+build-angular@17.3.17_@angular+compiler-cli@17.3.12_@angular+compiler@1_f1ce2686c3b8a24fc7f99e857e4191af/node_modules/@angular-devkit/build-angular/src/tools/babel/webpack-loader.js' in '/home/ubuntu/espalhai/frontend'
+
+Error: Module not found: Error: Can't resolve '/home/ubuntu/espalhai/frontend/node_modules/.pnpm/@angular-devkit+build-angular@17.3.17_@angular+compiler-cli@17.3.12_@angular+compiler@1_f1ce2686c3b8a24fc7f99e857e4191af/node_modules/@angular-devkit/build-angular/src/tools/babel/webpack-loader.js' in '/home/ubuntu/espalhai/frontend'
+
+Error: Module not found: Error: Can't resolve '/home/ubuntu/espalhai/frontend/node_modules/.pnpm/@angular-devkit+build-angular@17.3.17_@angular+compiler-cli@17.3.12_@angular+compiler@1_f1ce2686c3b8a24fc7f99e857e4191af/node_modules/@angular-devkit/build-angular/src/tools/babel/webpack-loader.js' in '/home/ubuntu/espalhai/frontend'
+
+Error: Module not found: Error: Can't resolve '/home/ubuntu/espalhai/frontend/node_modules/.pnpm/css-loader@6.10.0_webpack@5.94.0_esbuild@0.20.1_/node_modules/css-loader/dist/cjs.js' in '/home/ubuntu/espalhai/frontend'
+
+Error: Module not found: Error: Can't resolve '/home/ubuntu/espalhai/frontend/node_modules/.pnpm/css-loader@6.10.0_webpack@5.94.0_esbuild@0.20.1_/node_modules/css-loader/dist/cjs.js' in '/home/ubuntu/espalhai/frontend'
+
+Error: Module not found: Error: Can't resolve '/home/ubuntu/espalhai/frontend/node_modules/.pnpm/css-loader@6.10.0_webpack@5.94.0_esbuild@0.20.1_/node_modules/css-loader/dist/cjs.js' in '/home/ubuntu/espalhai/frontend'
+
+Error: Module not found: Error: Can't resolve '/home/ubuntu/espalhai/frontend/node_modules/.pnpm/css-loader@6.10.0_webpack@5.94.0_esbuild@0.20.1_/node_modules/css-loader/dist/cjs.js' in '/home/ubuntu/espalhai/frontend'
+
+Error: Module not found: Error: Can't resolve '/home/ubuntu/espalhai/frontend/node_modules/.pnpm/css-loader@6.10.0_webpack@5.94.0_esbuild@0.20.1_/node_modules/css-loader/dist/cjs.js' in '/home/ubuntu/espalhai/frontend'
+
+Error: Module not found: Error: Can't resolve '/home/ubuntu/espalhai/frontend/node_modules/.pnpm/css-loader@6.10.0_webpack@5.94.0_esbuild@0.20.1_/node_modules/css-loader/dist/cjs.js' in '/home/ubuntu/espalhai/frontend'
+
+Error: Module not found: Error: Can't resolve '/home/ubuntu/espalhai/frontend/node_modules/.pnpm/css-loader@6.10.0_webpack@5.94.0_esbuild@0.20.1_/node_modules/css-loader/dist/cjs.js' in '/home/ubuntu/espalhai/frontend'
+
+Error: Module not found: Error: Can't resolve '/home/ubuntu/espalhai/frontend/node_modules/.pnpm/css-loader@6.10.0_webpack@5.94.0_esbuild@0.20.1_/node_modules/css-loader/dist/cjs.js' in '/home/ubuntu/espalhai/frontend'
+
+Error: Module not found: Error: Can't resolve '/home/ubuntu/espalhai/frontend/node_modules/.pnpm/css-loader@6.10.0_webpack@5.94.0_esbuild@0.20.1_/node_modules/css-loader/dist/cjs.js' in '/home/ubuntu/espalhai/frontend'
+
+Error: Module not found: Error: Can't resolve '/home/ubuntu/espalhai/frontend/node_modules/.pnpm/css-loader@6.10.0_webpack@5.94.0_esbuild@0.20.1_/node_modules/css-loader/dist/cjs.js' in '/home/ubuntu/espalhai/frontend'
+
+Error: Module not found: Error: Can't resolve '/home/ubuntu/espalhai/frontend/node_modules/.pnpm/css-loader@6.10.0_webpack@5.94.0_esbuild@0.20.1_/node_modules/css-loader/dist/cjs.js' in '/home/ubuntu/espalhai/frontend'
+
+Error: Module not found: Error: Can't resolve '/home/ubuntu/espalhai/frontend/node_modules/.pnpm/css-loader@6.10.0_webpack@5.94.0_esbuild@0.20.1_/node_modules/css-loader/dist/cjs.js' in '/home/ubuntu/espalhai/frontend'
+
+Error: Module not found: Error: Can't resolve '/home/ubuntu/espalhai/frontend/node_modules/.pnpm/css-loader@6.10.0_webpack@5.94.0_esbuild@0.20.1_/node_modules/css-loader/dist/cjs.js' in '/home/ubuntu/espalhai/frontend'
+
+Error: Module not found: Error: Can't resolve '/home/ubuntu/espalhai/frontend/node_modules/.pnpm/css-loader@6.10.0_webpack@5.94.0_esbuild@0.20.1_/node_modules/css-loader/dist/cjs.js' in '/home/ubuntu/espalhai/frontend'
+
+Error: Module not found: Error: Can't resolve '/home/ubuntu/espalhai/frontend/node_modules/.pnpm/css-loader@6.10.0_webpack@5.94.0_esbuild@0.20.1_/node_modules/css-loader/dist/cjs.js' in '/home/ubuntu/espalhai/frontend'
+
+Error: Module not found: Error: Can't resolve '/home/ubuntu/espalhai/frontend/node_modules/.pnpm/css-loader@6.10.0_webpack@5.94.0_esbuild@0.20.1_/node_modules/css-loader/dist/cjs.js' in '/home/ubuntu/espalhai/frontend'
+
+Error: Module not found: Error: Can't resolve '/home/ubuntu/espalhai/frontend/node_modules/.pnpm/css-loader@6.10.0_webpack@5.94.0_esbuild@0.20.1_/node_modules/css-loader/dist/cjs.js' in '/home/ubuntu/espalhai/frontend'
+
+Error: Module not found: Error: Can't resolve '/home/ubuntu/espalhai/frontend/node_modules/.pnpm/css-loader@6.10.0_webpack@5.94.0_esbuild@0.20.1_/node_modules/css-loader/dist/cjs.js' in '/home/ubuntu/espalhai/frontend'
+
+Error: Module not found: Error: Can't resolve '/home/ubuntu/espalhai/frontend/node_modules/.pnpm/css-loader@6.10.0_webpack@5.94.0_esbuild@0.20.1_/node_modules/css-loader/dist/cjs.js' in '/home/ubuntu/espalhai/frontend'
+
+
+
+✖ Failed to compile.
+✔ Browser application bundle generation complete.
+
+
+
+1 unchanged chunks
+
+Build at: 2026-02-14T21:27:20.981Z - Hash: 455ffbcfbcf6e2a0 - Time: 137ms
+
+Error: Module not found: Error: Can't resolve '/home/ubuntu/espalhai/frontend/node_modules/.pnpm/@angular-devkit+build-angular@17.3.17_@angular+compiler-cli@17.3.12_@angular+compiler@1_f1ce2686c3b8a24fc7f99e857e4191af/node_modules/@angular-devkit/build-angular/src/tools/babel/webpack-loader.js' in '/home/ubuntu/espalhai/frontend'
+
+Error: Module not found: Error: Can't resolve '/home/ubuntu/espalhai/frontend/node_modules/.pnpm/@angular-devkit+build-angular@17.3.17_@angular+compiler-cli@17.3.12_@angular+compiler@1_f1ce2686c3b8a24fc7f99e857e4191af/node_modules/@angular-devkit/build-angular/src/tools/babel/webpack-loader.js' in '/home/ubuntu/espalhai/frontend'
+
+Error: Module not found: Error: Can't resolve '/home/ubuntu/espalhai/frontend/node_modules/.pnpm/css-loader@6.10.0_webpack@5.94.0_esbuild@0.20.1_/node_modules/css-loader/dist/cjs.js' in '/home/ubuntu/espalhai/frontend'
+
+Error: Module not found: Error: Can't resolve '/home/ubuntu/espalhai/frontend/node_modules/.pnpm/css-loader@6.10.0_webpack@5.94.0_esbuild@0.20.1_/node_modules/css-loader/dist/cjs.js' in '/home/ubuntu/espalhai/frontend'
+
+Error: Module not found: Error: Can't resolve '/home/ubuntu/espalhai/frontend/node_modules/.pnpm/css-loader@6.10.0_webpack@5.94.0_esbuild@0.20.1_/node_modules/css-loader/dist/cjs.js' in '/home/ubuntu/espalhai/frontend'
+
+Error: Module not found: Error: Can't resolve '/home/ubuntu/espalhai/frontend/node_modules/.pnpm/css-loader@6.10.0_webpack@5.94.0_esbuild@0.20.1_/node_modules/css-loader/dist/cjs.js' in '/home/ubuntu/espalhai/frontend'
+
+Error: Module not found: Error: Can't resolve '/home/ubuntu/espalhai/frontend/node_modules/.pnpm/css-loader@6.10.0_webpack@5.94.0_esbuild@0.20.1_/node_modules/css-loader/dist/cjs.js' in '/home/ubuntu/espalhai/frontend'
+
+Error: Module not found: Error: Can't resolve '/home/ubuntu/espalhai/frontend/node_modules/.pnpm/css-loader@6.10.0_webpack@5.94.0_esbuild@0.20.1_/node_modules/css-loader/dist/cjs.js' in '/home/ubuntu/espalhai/frontend'
+
+Error: Module not found: Error: Can't resolve '/home/ubuntu/espalhai/frontend/node_modules/.pnpm/css-loader@6.10.0_webpack@5.94.0_esbuild@0.20.1_/node_modules/css-loader/dist/cjs.js' in '/home/ubuntu/espalhai/frontend'
+
+Error: Module not found: Error: Can't resolve '/home/ubuntu/espalhai/frontend/node_modules/.pnpm/css-loader@6.10.0_webpack@5.94.0_esbuild@0.20.1_/node_modules/css-loader/dist/cjs.js' in '/home/ubuntu/espalhai/frontend'
+
+Error: Module not found: Error: Can't resolve '/home/ubuntu/espalhai/frontend/node_modules/.pnpm/css-loader@6.10.0_webpack@5.94.0_esbuild@0.20.1_/node_modules/css-loader/dist/cjs.js' in '/home/ubuntu/espalhai/frontend'
+
+Error: Module not found: Error: Can't resolve '/home/ubuntu/espalhai/frontend/node_modules/.pnpm/css-loader@6.10.0_webpack@5.94.0_esbuild@0.20.1_/node_modules/css-loader/dist/cjs.js' in '/home/ubuntu/espalhai/frontend'
+
+Error: Module not found: Error: Can't resolve '/home/ubuntu/espalhai/frontend/node_modules/.pnpm/css-loader@6.10.0_webpack@5.94.0_esbuild@0.20.1_/node_modules/css-loader/dist/cjs.js' in '/home/ubuntu/espalhai/frontend'
+
+Error: Module not found: Error: Can't resolve '/home/ubuntu/espalhai/frontend/node_modules/.pnpm/css-loader@6.10.0_webpack@5.94.0_esbuild@0.20.1_/node_modules/css-loader/dist/cjs.js' in '/home/ubuntu/espalhai/frontend'
+
+Error: Module not found: Error: Can't resolve '/home/ubuntu/espalhai/frontend/node_modules/.pnpm/css-loader@6.10.0_webpack@5.94.0_esbuild@0.20.1_/node_modules/css-loader/dist/cjs.js' in '/home/ubuntu/espalhai/frontend'
+
+Error: Module not found: Error: Can't resolve '/home/ubuntu/espalhai/frontend/node_modules/.pnpm/css-loader@6.10.0_webpack@5.94.0_esbuild@0.20.1_/node_modules/css-loader/dist/cjs.js' in '/home/ubuntu/espalhai/frontend'
+
+Error: Module not found: Error: Can't resolve '/home/ubuntu/espalhai/frontend/node_modules/.pnpm/css-loader@6.10.0_webpack@5.94.0_esbuild@0.20.1_/node_modules/css-loader/dist/cjs.js' in '/home/ubuntu/espalhai/frontend'
+
+Error: Module not found: Error: Can't resolve '/home/ubuntu/espalhai/frontend/node_modules/.pnpm/css-loader@6.10.0_webpack@5.94.0_esbuild@0.20.1_/node_modules/css-loader/dist/cjs.js' in '/home/ubuntu/espalhai/frontend'
+
+Error: Module not found: Error: Can't resolve '/home/ubuntu/espalhai/frontend/node_modules/.pnpm/css-loader@6.10.0_webpack@5.94.0_esbuild@0.20.1_/node_modules/css-loader/dist/cjs.js' in '/home/ubuntu/espalhai/frontend'
+
+Error: Module not found: Error: Can't resolve '/home/ubuntu/espalhai/frontend/node_modules/.pnpm/css-loader@6.10.0_webpack@5.94.0_esbuild@0.20.1_/node_modules/css-loader/dist/cjs.js' in '/home/ubuntu/espalhai/frontend'
+
+Error: Module not found: Error: Can't resolve '/home/ubuntu/espalhai/frontend/node_modules/.pnpm/css-loader@6.10.0_webpack@5.94.0_esbuild@0.20.1_/node_modules/css-loader/dist/cjs.js' in '/home/ubuntu/espalhai/frontend'
+
+Error: Module not found: Error: Can't resolve '/home/ubuntu/espalhai/frontend/node_modules/.pnpm/css-loader@6.10.0_webpack@5.94.0_esbuild@0.20.1_/node_modules/css-loader/dist/cjs.js' in '/home/ubuntu/espalhai/frontend'
+
+Error: Module not found: Error: Can't resolve '/home/ubuntu/espalhai/frontend/node_modules/.pnpm/webpack-dev-server@4.15.1_webpack@5.94.0/node_modules/webpack-dev-server/client/index.js?protocol=auto%3A&username=&password=&hostname=0.0.0.0&port=0&pathname=%2Fng-cli-ws&logging=info&overlay=%7B%22errors%22%3Atrue%2C%22warnings%22%3Afalse%2C%22runtimeErrors%22%3Afalse%7D&reconnect=10&hot=false&live-reload=true' in '/home/ubuntu/espalhai/frontend'
+
+
+
+✖ Failed to compile.
+✔ Browser application bundle generation complete.
+
+
+
+1 unchanged chunks
+
+Build at: 2026-02-14T21:27:21.363Z - Hash: a6051c9cd51aeb7c - Time: 262ms
+
+Error: Module not found: Error: Can't resolve '/home/ubuntu/espalhai/frontend/node_modules/.pnpm/@angular-devkit+build-angular@17.3.17_@angular+compiler-cli@17.3.12_@angular+compiler@1_f1ce2686c3b8a24fc7f99e857e4191af/node_modules/@angular-devkit/build-angular/src/tools/babel/webpack-loader.js' in '/home/ubuntu/espalhai/frontend'
+
+Error: Module not found: Error: Can't resolve '/home/ubuntu/espalhai/frontend/node_modules/.pnpm/source-map-loader@5.0.0_webpack@5.94.0_esbuild@0.20.1_/node_modules/source-map-loader/dist/cjs.js' in '/home/ubuntu/espalhai/frontend'
+
+Error: Module not found: Error: Can't resolve '/home/ubuntu/espalhai/frontend/node_modules/.pnpm/css-loader@6.10.0_webpack@5.94.0_esbuild@0.20.1_/node_modules/css-loader/dist/cjs.js' in '/home/ubuntu/espalhai/frontend'
+
+Error: Module not found: Error: Can't resolve '/home/ubuntu/espalhai/frontend/node_modules/.pnpm/css-loader@6.10.0_webpack@5.94.0_esbuild@0.20.1_/node_modules/css-loader/dist/cjs.js' in '/home/ubuntu/espalhai/frontend'
+
+Error: Module not found: Error: Can't resolve '/home/ubuntu/espalhai/frontend/node_modules/.pnpm/css-loader@6.10.0_webpack@5.94.0_esbuild@0.20.1_/node_modules/css-loader/dist/cjs.js' in '/home/ubuntu/espalhai/frontend'
+
+Error: Module not found: Error: Can't resolve '/home/ubuntu/espalhai/frontend/node_modules/.pnpm/css-loader@6.10.0_webpack@5.94.0_esbuild@0.20.1_/node_modules/css-loader/dist/cjs.js' in '/home/ubuntu/espalhai/frontend'
+
+Error: Module not found: Error: Can't resolve '/home/ubuntu/espalhai/frontend/node_modules/.pnpm/css-loader@6.10.0_webpack@5.94.0_esbuild@0.20.1_/node_modules/css-loader/dist/cjs.js' in '/home/ubuntu/espalhai/frontend'
+
+Error: Module not found: Error: Can't resolve '/home/ubuntu/espalhai/frontend/node_modules/.pnpm/css-loader@6.10.0_webpack@5.94.0_esbuild@0.20.1_/node_modules/css-loader/dist/cjs.js' in '/home/ubuntu/espalhai/frontend'
+
+Error: Module not found: Error: Can't resolve '/home/ubuntu/espalhai/frontend/node_modules/.pnpm/css-loader@6.10.0_webpack@5.94.0_esbuild@0.20.1_/node_modules/css-loader/dist/cjs.js' in '/home/ubuntu/espalhai/frontend'
+
+Error: Module not found: Error: Can't resolve '/home/ubuntu/espalhai/frontend/node_modules/.pnpm/css-loader@6.10.0_webpack@5.94.0_esbuild@0.20.1_/node_modules/css-loader/dist/cjs.js' in '/home/ubuntu/espalhai/frontend'
+
+Error: Module not found: Error: Can't resolve '/home/ubuntu/espalhai/frontend/node_modules/.pnpm/css-loader@6.10.0_webpack@5.94.0_esbuild@0.20.1_/node_modules/css-loader/dist/cjs.js' in '/home/ubuntu/espalhai/frontend'
+
+Error: Module not found: Error: Can't resolve '/home/ubuntu/espalhai/frontend/node_modules/.pnpm/css-loader@6.10.0_webpack@5.94.0_esbuild@0.20.1_/node_modules/css-loader/dist/cjs.js' in '/home/ubuntu/espalhai/frontend'
+
+Error: Module not found: Error: Can't resolve '/home/ubuntu/espalhai/frontend/node_modules/.pnpm/css-loader@6.10.0_webpack@5.94.0_esbuild@0.20.1_/node_modules/css-loader/dist/cjs.js' in '/home/ubuntu/espalhai/frontend'
+
+Error: Module not found: Error: Can't resolve '/home/ubuntu/espalhai/frontend/node_modules/.pnpm/css-loader@6.10.0_webpack@5.94.0_esbuild@0.20.1_/node_modules/css-loader/dist/cjs.js' in '/home/ubuntu/espalhai/frontend'
+
+Error: Module not found: Error: Can't resolve '/home/ubuntu/espalhai/frontend/node_modules/.pnpm/css-loader@6.10.0_webpack@5.94.0_esbuild@0.20.1_/node_modules/css-loader/dist/cjs.js' in '/home/ubuntu/espalhai/frontend'
+
+Error: Module not found: Error: Can't resolve '/home/ubuntu/espalhai/frontend/node_modules/.pnpm/css-loader@6.10.0_webpack@5.94.0_esbuild@0.20.1_/node_modules/css-loader/dist/cjs.js' in '/home/ubuntu/espalhai/frontend'
+
+Error: Module not found: Error: Can't resolve '/home/ubuntu/espalhai/frontend/node_modules/.pnpm/css-loader@6.10.0_webpack@5.94.0_esbuild@0.20.1_/node_modules/css-loader/dist/cjs.js' in '/home/ubuntu/espalhai/frontend'
+
+Error: Module not found: Error: Can't resolve '/home/ubuntu/espalhai/frontend/node_modules/.pnpm/css-loader@6.10.0_webpack@5.94.0_esbuild@0.20.1_/node_modules/css-loader/dist/cjs.js' in '/home/ubuntu/espalhai/frontend'
+
+Error: Module not found: Error: Can't resolve '/home/ubuntu/espalhai/frontend/node_modules/.pnpm/css-loader@6.10.0_webpack@5.94.0_esbuild@0.20.1_/node_modules/css-loader/dist/cjs.js' in '/home/ubuntu/espalhai/frontend'
+
+Error: Module not found: Error: Can't resolve '/home/ubuntu/espalhai/frontend/node_modules/.pnpm/css-loader@6.10.0_webpack@5.94.0_esbuild@0.20.1_/node_modules/css-loader/dist/cjs.js' in '/home/ubuntu/espalhai/frontend'
+
+Error: Module not found: Error: Can't resolve '/home/ubuntu/espalhai/frontend/node_modules/.pnpm/css-loader@6.10.0_webpack@5.94.0_esbuild@0.20.1_/node_modules/css-loader/dist/cjs.js' in '/home/ubuntu/espalhai/frontend'
+
+Error: Module not found: Error: Can't resolve '/home/ubuntu/espalhai/frontend/node_modules/.pnpm/css-loader@6.10.0_webpack@5.94.0_esbuild@0.20.1_/node_modules/css-loader/dist/cjs.js' in '/home/ubuntu/espalhai/frontend'
+
+Error: Module not found: Error: Can't resolve '/home/ubuntu/espalhai/frontend/node_modules/.pnpm/css-loader@6.10.0_webpack@5.94.0_esbuild@0.20.1_/node_modules/css-loader/dist/cjs.js' in '/home/ubuntu/espalhai/frontend'
+
+Error: Module not found: Error: Can't resolve '/home/ubuntu/espalhai/frontend/node_modules/.pnpm/webpack-dev-server@4.15.1_webpack@5.94.0/node_modules/webpack-dev-server/client/index.js?protocol=auto%3A&username=&password=&hostname=0.0.0.0&port=0&pathname=%2Fng-cli-ws&logging=info&overlay=%7B%22errors%22%3Atrue%2C%22warnings%22%3Afalse%2C%22runtimeErrors%22%3Afalse%7D&reconnect=10&hot=false&live-reload=true' in '/home/ubuntu/espalhai/frontend'
+
+
+
+✖ Failed to compile.
+✔ Browser application bundle generation complete.
+
+
+
+1 unchanged chunks
+
+Build at: 2026-02-14T21:27:21.891Z - Hash: 4af1f2508aa77c13 - Time: 473ms
+
+Error: Module not found: Error: Can't resolve '/home/ubuntu/espalhai/frontend/node_modules/.pnpm/@angular-devkit+build-angular@17.3.17_@angular+compiler-cli@17.3.12_@angular+compiler@1_f1ce2686c3b8a24fc7f99e857e4191af/node_modules/@angular-devkit/build-angular/src/tools/babel/webpack-loader.js' in '/home/ubuntu/espalhai/frontend'
+
+Error: Module not found: Error: Can't resolve '/home/ubuntu/espalhai/frontend/node_modules/.pnpm/source-map-loader@5.0.0_webpack@5.94.0_esbuild@0.20.1_/node_modules/source-map-loader/dist/cjs.js' in '/home/ubuntu/espalhai/frontend'
+
+Error: Module not found: Error: Can't resolve '/home/ubuntu/espalhai/frontend/node_modules/.pnpm/mini-css-extract-plugin@2.8.1_webpack@5.94.0_esbuild@0.20.1_/node_modules/mini-css-extract-plugin/dist/loader.js' in '/home/ubuntu/espalhai/frontend'
+
+Error: Module not found: Error: Can't resolve '/home/ubuntu/espalhai/frontend/node_modules/.pnpm/mini-css-extract-plugin@2.8.1_webpack@5.94.0_esbuild@0.20.1_/node_modules/mini-css-extract-plugin/dist/loader.js' in '/home/ubuntu/espalhai/frontend'
+
+Error: Module not found: Error: Can't resolve '/home/ubuntu/espalhai/frontend/node_modules/.pnpm/mini-css-extract-plugin@2.8.1_webpack@5.94.0_esbuild@0.20.1_/node_modules/mini-css-extract-plugin/dist/loader.js' in '/home/ubuntu/espalhai/frontend'
+
+Error: Module not found: Error: Can't resolve '/home/ubuntu/espalhai/frontend/node_modules/.pnpm/mini-css-extract-plugin@2.8.1_webpack@5.94.0_esbuild@0.20.1_/node_modules/mini-css-extract-plugin/dist/loader.js' in '/home/ubuntu/espalhai/frontend'
+
+Error: Module not found: Error: Can't resolve '/home/ubuntu/espalhai/frontend/node_modules/.pnpm/mini-css-extract-plugin@2.8.1_webpack@5.94.0_esbuild@0.20.1_/node_modules/mini-css-extract-plugin/dist/loader.js' in '/home/ubuntu/espalhai/frontend'
+
+Error: Module not found: Error: Can't resolve '/home/ubuntu/espalhai/frontend/node_modules/.pnpm/mini-css-extract-plugin@2.8.1_webpack@5.94.0_esbuild@0.20.1_/node_modules/mini-css-extract-plugin/dist/loader.js' in '/home/ubuntu/espalhai/frontend'
+
+Error: Module not found: Error: Can't resolve '/home/ubuntu/espalhai/frontend/node_modules/.pnpm/mini-css-extract-plugin@2.8.1_webpack@5.94.0_esbuild@0.20.1_/node_modules/mini-css-extract-plugin/dist/loader.js' in '/home/ubuntu/espalhai/frontend'
+
+Error: Module not found: Error: Can't resolve '/home/ubuntu/espalhai/frontend/node_modules/.pnpm/mini-css-extract-plugin@2.8.1_webpack@5.94.0_esbuild@0.20.1_/node_modules/mini-css-extract-plugin/dist/loader.js' in '/home/ubuntu/espalhai/frontend'
+
+Error: Module not found: Error: Can't resolve '/home/ubuntu/espalhai/frontend/node_modules/.pnpm/mini-css-extract-plugin@2.8.1_webpack@5.94.0_esbuild@0.20.1_/node_modules/mini-css-extract-plugin/dist/loader.js' in '/home/ubuntu/espalhai/frontend'
+
+Error: Module not found: Error: Can't resolve '/home/ubuntu/espalhai/frontend/node_modules/.pnpm/mini-css-extract-plugin@2.8.1_webpack@5.94.0_esbuild@0.20.1_/node_modules/mini-css-extract-plugin/dist/loader.js' in '/home/ubuntu/espalhai/frontend'
+
+Error: Module not found: Error: Can't resolve '/home/ubuntu/espalhai/frontend/node_modules/.pnpm/mini-css-extract-plugin@2.8.1_webpack@5.94.0_esbuild@0.20.1_/node_modules/mini-css-extract-plugin/dist/loader.js' in '/home/ubuntu/espalhai/frontend'
+
+Error: Module not found: Error: Can't resolve '/home/ubuntu/espalhai/frontend/node_modules/.pnpm/mini-css-extract-plugin@2.8.1_webpack@5.94.0_esbuild@0.20.1_/node_modules/mini-css-extract-plugin/dist/loader.js' in '/home/ubuntu/espalhai/frontend'
+
+Error: Module not found: Error: Can't resolve '/home/ubuntu/espalhai/frontend/node_modules/.pnpm/mini-css-extract-plugin@2.8.1_webpack@5.94.0_esbuild@0.20.1_/node_modules/mini-css-extract-plugin/dist/loader.js' in '/home/ubuntu/espalhai/frontend'
+
+Error: Module not found: Error: Can't resolve '/home/ubuntu/espalhai/frontend/node_modules/.pnpm/mini-css-extract-plugin@2.8.1_webpack@5.94.0_esbuild@0.20.1_/node_modules/mini-css-extract-plugin/dist/loader.js' in '/home/ubuntu/espalhai/frontend'
+
+Error: Module not found: Error: Can't resolve '/home/ubuntu/espalhai/frontend/node_modules/.pnpm/mini-css-extract-plugin@2.8.1_webpack@5.94.0_esbuild@0.20.1_/node_modules/mini-css-extract-plugin/dist/loader.js' in '/home/ubuntu/espalhai/frontend'
+
+Error: Module not found: Error: Can't resolve '/home/ubuntu/espalhai/frontend/node_modules/.pnpm/mini-css-extract-plugin@2.8.1_webpack@5.94.0_esbuild@0.20.1_/node_modules/mini-css-extract-plugin/dist/loader.js' in '/home/ubuntu/espalhai/frontend'
+
+Error: Module not found: Error: Can't resolve '/home/ubuntu/espalhai/frontend/node_modules/.pnpm/mini-css-extract-plugin@2.8.1_webpack@5.94.0_esbuild@0.20.1_/node_modules/mini-css-extract-plugin/dist/loader.js' in '/home/ubuntu/espalhai/frontend'
+
+Error: Module not found: Error: Can't resolve '/home/ubuntu/espalhai/frontend/node_modules/.pnpm/mini-css-extract-plugin@2.8.1_webpack@5.94.0_esbuild@0.20.1_/node_modules/mini-css-extract-plugin/dist/loader.js' in '/home/ubuntu/espalhai/frontend'
+
+Error: Module not found: Error: Can't resolve '/home/ubuntu/espalhai/frontend/node_modules/.pnpm/mini-css-extract-plugin@2.8.1_webpack@5.94.0_esbuild@0.20.1_/node_modules/mini-css-extract-plugin/dist/loader.js' in '/home/ubuntu/espalhai/frontend'
+
+Error: Module not found: Error: Can't resolve '/home/ubuntu/espalhai/frontend/node_modules/.pnpm/mini-css-extract-plugin@2.8.1_webpack@5.94.0_esbuild@0.20.1_/node_modules/mini-css-extract-plugin/dist/loader.js' in '/home/ubuntu/espalhai/frontend'
+
+Error: Module not found: Error: Can't resolve '/home/ubuntu/espalhai/frontend/node_modules/.pnpm/mini-css-extract-plugin@2.8.1_webpack@5.94.0_esbuild@0.20.1_/node_modules/mini-css-extract-plugin/dist/loader.js' in '/home/ubuntu/espalhai/frontend'
+
+Error: Module not found: Error: Can't resolve '/home/ubuntu/espalhai/frontend/node_modules/.pnpm/mini-css-extract-plugin@2.8.1_webpack@5.94.0_esbuild@0.20.1_/node_modules/mini-css-extract-plugin/dist/loader.js' in '/home/ubuntu/espalhai/frontend'
+
+Error: Module not found: Error: Can't resolve '/home/ubuntu/espalhai/frontend/node_modules/.pnpm/webpack-dev-server@4.15.1_webpack@5.94.0/node_modules/webpack-dev-server/client/index.js?protocol=auto%3A&username=&password=&hostname=0.0.0.0&port=0&pathname=%2Fng-cli-ws&logging=info&overlay=%7B%22errors%22%3Atrue%2C%22warnings%22%3Afalse%2C%22runtimeErrors%22%3Afalse%7D&reconnect=10&hot=false&live-reload=true' in '/home/ubuntu/espalhai/frontend'
+
+Error: src/app/app.component.ts:1:27 - error TS2307: Cannot find module '@angular/core' or its corresponding type declarations.
+
+1 import { Component } from '@angular/core';
+                            ~~~~~~~~~~~~~~~
+
+
+Error: src/app/app.component.ts:24:7 - error NG8001: 'router-outlet' is not a known element:
+1. If 'router-outlet' is an Angular component, then verify that it is part of this module.
+2. If 'router-outlet' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@NgModule.schemas' of this component to suppress this message.
+
+24       <router-outlet></router-outlet>
+         ~~~~~~~~~~~~~~~
+
+
+Error: src/app/app.module.ts:1:26 - error TS2307: Cannot find module '@angular/core' or its corresponding type declarations.
+
+1 import { NgModule } from '@angular/core';
+                           ~~~~~~~~~~~~~~~
+
+
+Error: src/app/app.module.ts:2:31 - error TS2307: Cannot find module '@angular/platform-browser' or its corresponding type declarations.
+
+2 import { BrowserModule } from '@angular/platform-browser';
+                                ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+Error: src/app/app.module.ts:3:53 - error TS2307: Cannot find module '@angular/common/http' or its corresponding type declarations.
+
+3 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+                                                      ~~~~~~~~~~~~~~~~~~~~~~
+
+
+Error: src/app/app.module.ts:4:29 - error TS2307: Cannot find module '@angular/forms' or its corresponding type declarations.
+
+4 import { FormsModule } from '@angular/forms';
+                              ~~~~~~~~~~~~~~~~
+
+
+Error: src/app/app.module.ts:5:38 - error TS2307: Cannot find module '@angular/router' or its corresponding type declarations.
+
+5 import { RouterModule, Routes } from '@angular/router';
+                                       ~~~~~~~~~~~~~~~~~
+
+
+Error: src/app/app.module.ts:36:12 - error NG1010: Value
+
+Error: src/app/components/ad-create.component.ts:1:27 - error TS2307: Cannot find module '@angular/core' or its corresponding type declarations.
+
+1 import { Component } from '@angular/core';
+                            ~~~~~~~~~~~~~~~
+
+
+Error: src/app/components/ad-create.component.ts:3:24 - error TS2307: Cannot find module '@angular/router' or its corresponding type declarations.
+
+3 import { Router } from '@angular/router';
+                         ~~~~~~~~~~~~~~~~~
+
+
+Error: src/app/components/ad-create.component.ts:18:21 - error NG8002: Can't bind to 'ngModel' since it isn't a known property of 'select'.
+
+18             <select [(ngModel)]="ad.tipo" (change)="onTypeChange()">
+                       ~~~~~~~~~~~~~~~~~~~~~
+
+
+Error: src/app/components/ad-create.component.ts:27:32 - error NG8002: Can't bind to 'ngModel' since it isn't a known property of 'input'.
+
+27             <input type="text" [(ngModel)]="ad.titulo" placeholder="Ex: iPhone 15 Pro Max 256GB">
+                                  ~~~~~~~~~~~~~~~~~~~~~~~
+
+
+Error: src/app/components/ad-create.component.ts:32:23 - error NG8002: Can't bind to 'ngModel' since it isn't a known property of 'textarea'.
+
+32             <textarea [(ngModel)]="ad.descricao" rows="5" placeholder="Descreva as principais características..."></textarea>
+                         ~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+Error: src/app/components/ad-list.component.ts:1:35 - error TS2307: Cannot find module '@angular/core' or its corresponding type declarations.
+
+1 import { Component, OnInit } from '@angular/core';
+                                    ~~~~~~~~~~~~~~~
+
+
+Error: src/app/components/ad-list.component.ts:22:17 - error NG8002: Can't bind to 'ngModel' since it isn't a known property of 'select'.
+
+22         <select [(ngModel)]="filter.categoryId" (change)="loadAds()" style="padding: 0.5rem 1rem; border-radius: 0.5rem; border: 1px solid #cbd5e1; outline: none; flex: 1;">
+                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+Error: src/app/components/ad-list.component.ts:23:19 - error NG8002: Can't bind to 'ngValue' since it isn't a known property of 'option'.
+
+23           <option [ngValue]="null">Todas as Categorias</option>
+                     ~~~~~~~~~~~~~~~~
+
+
+Error: src/app/components/ad-list.component.ts:26:17 - error NG8002: Can't bind to 'ngModel' since it isn't a known property of 'select'.
+
+26         <select [(ngModel)]="filter.status" (change)="loadAds()" style="padding: 0.5rem 1rem; border-radius: 0.5rem; border: 1px solid #cbd5e1; outline: none; flex: 1;">
+                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+Error: src/app/components/ad-list.component.ts:69:18 - error NG8002: Can't bind to 'routerLink' since it isn't a known property of 'a'.
+
+69               <a [routerLink]="['/chat']" [queryParams]="{user: ad.usuario?.id}" style="color: var(--primary-color); font-weight: 700; text-decoration: none; font-size: 0.875rem; display: flex; align-items: center; gap: 0.25rem;">
+                    ~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+Error: src/app/components/ad-list.component.ts:69:43 - error NG8002: Can't bind to 'queryParams' since it isn't a known property of 'a'.
+
+69               <a [routerLink]="['/chat']" [queryParams]="{user: ad.usuario?.id}" style="color: var(--primary-color); font-weight: 700; text-decoration: none; font-size: 0.875rem; display: flex; align-items: center; gap: 0.25rem;">
+                                             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+Error: src/app/components/admin-panel.component.ts:1:35 - error TS2307: Cannot find module '@angular/core' or its corresponding type declarations.
+
+1 import { Component, OnInit } from '@angular/core';
+                                    ~~~~~~~~~~~~~~~
+
+
+Error: src/app/components/admin-panel.component.ts:2:28 - error TS2307: Cannot find module '@angular/common/http' or its corresponding type declarations.
+
+2 import { HttpClient } from '@angular/common/http';
+                             ~~~~~~~~~~~~~~~~~~~~~~
+
+
+Error: src/app/components/admin-panel.component.ts:28:14 - error NG8002: Can't bind to 'ngModel' since it isn't a known property of 'input'.
+
+28       <input [(ngModel)]="newCat.nome" placeholder="Nome">
+                ~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+Error: src/app/components/admin-panel.component.ts:51:130 - error TS7006: Parameter 'd' implicitly has an 'any' type.
+
+51   loadUsers() { this.http.get<any[]>('https://8080-idj7tprfmoubtxwdaiubm-d4843a45.us2.manus.computer/api/admin/users').subscribe(d => this.users = d); }
+                                                                                                                                    ~
+
+
+Error: src/app/components/admin-panel.component.ts:52:134 - error TS7006: Parameter 'd' implicitly has an 'any' type.
+
+52   loadCategories() { this.http.get<any[]>('https://8080-idj7tprfmoubtxwdaiubm-d4843a45.us2.manus.computer/api/ads/public').subscribe(d => this.categories = d); }
+                                                                                                                                        ~
+
+
+Error: src/app/components/chat.component.ts:1:35 - error TS2307: Cannot find module '@angular/core' or its corresponding type declarations.
+
+1 import { Component, OnInit } from '@angular/core';
+                                    ~~~~~~~~~~~~~~~
+
+
+Error: src/app/components/chat.component.ts:3:28 - error TS2307: Cannot find module '@angular/common/http' or its corresponding type declarations.
+
+3 import { HttpClient } from '@angular/common/http';
+                             ~~~~~~~~~~~~~~~~~~~~~~
+
+
+Error: src/app/components/chat.component.ts:46:36 - error NG8004: No pipe found with name 'date'.
+
+46                 {{ msg.timestamp | date:'HH:mm' }}
+                                      ~~~~
+
+
+Error: src/app/components/chat.component.ts:54:20 - error NG8002: Can't bind to 'ngModel' since it isn't a known property of 'input'.
+
+54             <input [(ngModel)]="newMessage"
+                      ~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+Error: src/app/components/chat.component.ts:84:18 - error TS7006: Parameter 'data' implicitly has an 'any' type.
+
+84       .subscribe(data => this.messages = data);
+                    ~~~~
+
+
+Error: src/app/components/login.component.ts:1:27 - error TS2307: Cannot find module '@angular/core' or its corresponding type declarations.
+
+1 import { Component } from '@angular/core';
+                            ~~~~~~~~~~~~~~~
+
+
+Error: src/app/components/login.component.ts:3:24 - error TS2307: Cannot find module '@angular/router' or its corresponding type declarations.
+
+3 import { Router } from '@angular/router';
+                         ~~~~~~~~~~~~~~~~~
+
+
+Error: src/app/components/login.component.ts:17:31 - error NG8002: Can't bind to 'ngModel' since it isn't a known property of 'input'.
+
+17           <input type="email" [(ngModel)]="credentials.email" name="email" placeholder="seu@email.com" required>
+                                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+Error: src/app/components/login.component.ts:22:34 - error NG8002: Can't bind to 'ngModel' since it isn't a known property of 'input'.
+
+22           <input type="password" [(ngModel)]="credentials.senha" name="senha" placeholder="••••••••" required>
+                                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+Error: src/app/components/signup.component.ts:1:27 - error TS2307: Cannot find module '@angular/core' or its corresponding type declarations.
+
+1 import { Component } from '@angular/core';
+                            ~~~~~~~~~~~~~~~
+
+
+Error: src/app/components/signup.component.ts:3:24 - error TS2307: Cannot find module '@angular/router' or its corresponding type declarations.
+
+3 import { Router } from '@angular/router';
+                         ~~~~~~~~~~~~~~~~~
+
+
+Error: src/app/components/signup.component.ts:18:32 - error NG8002: Can't bind to 'ngModel' since it isn't a known property of 'input'.
+
+18             <input type="text" [(ngModel)]="user.nome" name="nome" placeholder="Nome" required>
+                                  ~~~~~~~~~~~~~~~~~~~~~~~
+
+
+Error: src/app/components/signup.component.ts:22:31 - error NG8002: Can't bind to 'ngModel' since it isn't a known property of 'input'.
+
+22             <input type="tel" [(ngModel)]="user.telefone" name="telefone" placeholder="(00) 00000-0000" required>
+                                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+Error: src/app/components/signup.component.ts:28:31 - error NG8002: Can't bind to 'ngModel' since it isn't a known property of 'input'.
+
+28           <input type="email" [(ngModel)]="user.email" name="email" placeholder="seu@email.com" required>
+                                 ~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+Error: src/app/components/signup.component.ts:33:34 - error NG8002: Can't bind to 'ngModel' since it isn't a known property of 'input'.
+
+33           <input type="password" [(ngModel)]="user.senha" name="senha" placeholder="Mínimo 6 caracteres" required>
+                                    ~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+Error: src/app/services/ad.service.ts:1:28 - error TS2307: Cannot find module '@angular/core' or its corresponding type declarations.
+
+1 import { Injectable } from '@angular/core';
+                             ~~~~~~~~~~~~~~~
+
+
+Error: src/app/services/ad.service.ts:2:40 - error TS2307: Cannot find module '@angular/common/http' or its corresponding type declarations.
+
+2 import { HttpClient, HttpParams } from '@angular/common/http';
+                                         ~~~~~~~~~~~~~~~~~~~~~~
+
+
+Error: src/app/services/auth.interceptor.ts:1:28 - error TS2307: Cannot find module '@angular/core' or its corresponding type declarations.
+
+1 import { Injectable } from '@angular/core';
+                             ~~~~~~~~~~~~~~~
+
+
+Error: src/app/services/auth.interceptor.ts:2:70 - error TS2307: Cannot find module '@angular/common/http' or its corresponding type declarations.
+
+2 import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor } from '@angular/common/http';
+                                                                       ~~~~~~~~~~~~~~~~~~~~~~
+
+
+Error: src/app/services/auth.service.ts:1:28 - error TS2307: Cannot find module '@angular/core' or its corresponding type declarations.
+
+1 import { Injectable } from '@angular/core';
+                             ~~~~~~~~~~~~~~~
+
+
+Error: src/app/services/auth.service.ts:2:28 - error TS2307: Cannot find module '@angular/common/http' or its corresponding type declarations.
+
+2 import { HttpClient } from '@angular/common/http';
+                             ~~~~~~~~~~~~~~~~~~~~~~
+
+
+Error: src/app/services/chat.service.ts:1:28 - error TS2307: Cannot find module '@angular/core' or its corresponding type declarations.
+
+1 import { Injectable } from '@angular/core';
+                             ~~~~~~~~~~~~~~~
+
+
+Error: src/main.ts:1:40 - error TS2307: Cannot find module '@angular/platform-browser-dynamic' or its corresponding type declarations.
+
+1 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+                                         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+Error: src/main.ts:5:10 - error TS7006: Parameter 'err' implicitly has an 'any' type.
+
+5   .catch(err => console.error(err));
+           ~~~
+
+
+
+
+✖ Failed to compile.
+node:internal/process/promises:394
+    triggerUncaughtException(err, true /* fromPromise */);
+    ^
+
+[Error: ENOENT: no such file or directory, stat '/home/ubuntu/espalhai/frontend/.angular/cache/17.3.17/angular-webpack/232e7b1ff874acb40d1eb745dcc2796a62f12316/1.pack'] {
+  errno: -2,
+  code: 'ENOENT',
+  syscall: 'stat',
+  path: '/home/ubuntu/espalhai/frontend/.angular/cache/17.3.17/angular-webpack/232e7b1ff874acb40d1eb745dcc2796a62f12316/1.pack'
+}
+
+Node.js v22.13.0
