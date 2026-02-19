@@ -21,7 +21,6 @@ import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequestMapping("/api/admin")
-// @PreAuthorize("hasRole('ADMIN')")
 @RequiredArgsConstructor
 public class AdminController {
     private final UserService userService;
@@ -32,7 +31,7 @@ public class AdminController {
         return userService.findAll();
     }
 
-    @PostMapping("/users/{id}/toggle-status")
+    @PutMapping("/users/{id}/toggle")
     public ResponseEntity<User> toggleUserStatus(@PathVariable Long id) {
         return ResponseEntity.ok(userService.toggleStatus(id));
     }
