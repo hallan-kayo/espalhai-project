@@ -12,16 +12,30 @@ import { AdCreateComponent } from './components/ad-create.component';
 import { ChatComponent } from './components/chat.component';
 import { AdminPanelComponent } from './components/admin-panel.component';
 import { ProfileComponent } from './components/profile.component';
+import { LandingPageComponent } from './components/landing-page.component';
+import { FavoritesComponent } from './components/favorites.component';
 import { AuthInterceptor } from './services/auth.interceptor';
+import { inject } from '@angular/core';
+import { AuthService } from './services/auth.service';
+import { Router } from '@angular/router';
+
+const authGuard = () => {
+  const authService = inject(AuthService);
+  const router = inject(Router);
+  if (authService.isLoggedIn()) return true;
+  return router.parseUrl('/landing');
+};
 
 const routes: Routes = [
-  { path: 'home', component: AdListComponent },
+  { path: 'landing', component: LandingPageComponent },
+  { path: 'home', component: AdListComponent, canActivate: [authGuard] },
+  { path: 'favorites', component: FavoritesComponent, canActivate: [authGuard] },
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
-  { path: 'ad/create', component: AdCreateComponent },
-  { path: 'chat', component: ChatComponent },
-  { path: 'admin', component: AdminPanelComponent },
-  { path: 'profile', component: ProfileComponent },
+  { path: 'ad/create', component: AdCreateComponent, canActivate: [authGuard] },
+  { path: 'chat', component: ChatComponent, canActivate: [authGuard] },
+  { path: 'admin', component: AdminPanelComponent, canActivate: [authGuard] },
+  { path: 'profile', component: ProfileComponent, canActivate: [authGuard] },
   { path: '', redirectTo: '/home', pathMatch: 'full' }
 ];
 
@@ -34,7 +48,9 @@ const routes: Routes = [
     AdCreateComponent,
     ChatComponent,
     AdminPanelComponent,
-    ProfileComponent
+    ProfileComponent,
+    LandingPageComponent,
+    FavoritesComponent
   ],
   imports: [
     BrowserModule,

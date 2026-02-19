@@ -31,15 +31,18 @@ public class AdService {
         int count = ad.getImagens() != null ? ad.getImagens().size() : 0;
         if (ad.getTipo() == AdType.PRODUTO) {
             if (count < 1 || count > 10) throw new RuntimeException("Produtos devem ter entre 1 e 10 imagens.");
+            if (ad.getPreco() == null || ad.getPreco() <= 0) throw new RuntimeException("Preço é obrigatório para produtos.");
         } else if (ad.getTipo() == AdType.SERVICO) {
             if (count > 3) throw new RuntimeException("Serviços podem ter no máximo 3 imagens.");
+            if (ad.getValorServico() == null || ad.getValorServico() <= 0) throw new RuntimeException("Valor do serviço é obrigatório.");
         } else if (ad.getTipo() == AdType.VAGA) {
             if (count < 1 || count > 3) throw new RuntimeException("Vagas devem ter entre 1 e 3 imagens.");
+            if (ad.getSalario() == null || ad.getSalario() <= 0) throw new RuntimeException("Salário é obrigatório para vagas.");
         }
     }
 
-    public List<Ad> filterAds(Long categoryId, AdStatus status) {
-        return adRepository.findByFilters(categoryId, status);
+    public List<Ad> filterAds(Long categoryId, AdStatus status, AdType tipo) {
+        return adRepository.findByFilters(categoryId, status, tipo);
     }
 
     public Ad updateStatus(Long id, AdStatus status) {
@@ -50,5 +53,9 @@ public class AdService {
 
     public void deleteAd(Long id) {
         adRepository.deleteById(id);
+    }
+
+    public Ad getAdById(Long id) {
+        return adRepository.findById(id).orElseThrow(() -> new RuntimeException("Anúncio não encontrado"));
     }
 }

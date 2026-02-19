@@ -11,8 +11,9 @@ export class AuthService {
 
   constructor(private http: HttpClient) {
     const token = localStorage.getItem('token');
-    if (token) {
-      this.currentUserSubject.next({ token });
+    const user = localStorage.getItem('user');
+    if (token && user) {
+      this.currentUserSubject.next(JSON.parse(user));
     }
   }
 
@@ -20,13 +21,13 @@ export class AuthService {
     return this.http.post(`${this.apiUrl}/login`, credentials).pipe(
       tap((response: any) => {
         localStorage.setItem('token', response.token);
+        localStorage.setItem('user', JSON.stringify(response));
         this.currentUserSubject.next(response);
       })
     );
   }
 
   signup(user: any): Observable<any> {
-    console.log (user)
     return this.http.post(`${this.apiUrl}/signup`, user);
   }
 
@@ -40,10 +41,20 @@ export class AuthService {
 
   logout() {
     localStorage.removeItem('token');
+    localStorage.removeItem('user');
     this.currentUserSubject.next(null);
   }
 
   isLoggedIn(): boolean {
     return !!this.currentUserSubject.value;
+  }
+
+  isAdmin(): boolean {
+    const user = this.currentUserSubject.value;
+    return user && user.roles && user.roles.includes('ROLE_ADMIN');
+  }
+
+  getCurrentUser() {
+    return this.currentUserSubject.value;
   }
 }

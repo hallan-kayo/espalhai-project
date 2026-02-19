@@ -46,6 +46,21 @@ import { Router } from '@angular/router';
             <label style="display: block; font-size: 0.875rem; font-weight: 700; margin-bottom: 0.5rem; color: #475569;">DESCRIÇÃO DETALHADA</label>
             <textarea [(ngModel)]="ad.descricao" rows="6" placeholder="Descreva as principais características, estado de conservação ou detalhes do serviço..." style="width: 100%; padding: 0.85rem; border-radius: 0.75rem; border: 1px solid #cbd5e1; resize: none;"></textarea>
           </div>
+
+          <div *ngIf="ad.tipo === 'PRODUTO'" style="margin-bottom: 1.5rem;">
+            <label style="display: block; font-size: 0.875rem; font-weight: 700; margin-bottom: 0.5rem; color: #475569;">PREÇO (R$)</label>
+            <input type="number" [(ngModel)]="ad.preco" placeholder="0.00" style="width: 100%; padding: 0.85rem; border-radius: 0.75rem; border: 1px solid #cbd5e1;">
+          </div>
+
+          <div *ngIf="ad.tipo === 'SERVICO'" style="margin-bottom: 1.5rem;">
+            <label style="display: block; font-size: 0.875rem; font-weight: 700; margin-bottom: 0.5rem; color: #475569;">VALOR DO SERVIÇO (R$)</label>
+            <input type="number" [(ngModel)]="ad.valorServico" placeholder="0.00" style="width: 100%; padding: 0.85rem; border-radius: 0.75rem; border: 1px solid #cbd5e1;">
+          </div>
+
+          <div *ngIf="ad.tipo === 'VAGA'" style="margin-bottom: 1.5rem;">
+            <label style="display: block; font-size: 0.875rem; font-weight: 700; margin-bottom: 0.5rem; color: #475569;">SALÁRIO (R$)</label>
+            <input type="number" [(ngModel)]="ad.salario" placeholder="0.00" style="width: 100%; padding: 0.85rem; border-radius: 0.75rem; border: 1px solid #cbd5e1;">
+          </div>
         </div>
 
         <div style="display: flex; flex-direction: column; gap: 1.5rem;">
@@ -159,10 +174,18 @@ export class AdCreateComponent implements OnInit {
   }
 
   isValid() {
-    return this.ad.titulo && this.ad.descricao && 
+    const basicInfo = this.ad.titulo && this.ad.descricao && 
            this.ad.imagens.length >= this.minImages && 
            this.ad.imagens.length <= this.maxImages &&
            this.ad.estado && this.ad.cidade;
+    
+    if (!basicInfo) return false;
+
+    if (this.ad.tipo === 'PRODUTO') return !!this.ad.preco && this.ad.preco > 0;
+    if (this.ad.tipo === 'SERVICO') return !!this.ad.valorServico && this.ad.valorServico > 0;
+    if (this.ad.tipo === 'VAGA') return !!this.ad.salario && this.ad.salario > 0;
+
+    return true;
   }
 
   save() {
