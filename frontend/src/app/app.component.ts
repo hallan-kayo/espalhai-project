@@ -1,26 +1,29 @@
 import { Component } from '@angular/core';
 import { AuthService } from './services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
   template: `
     <nav class="navbar">
       <div class="nav-container">
-        <div class="logo" routerLink="/home" style="cursor: pointer;">Espalhaí</div>
+        <div class="logo" [routerLink]="authService.isLoggedIn() ? '/home' : '/landing'" style="cursor: pointer;">Espalhaí</div>
         
         <button class="mobile-menu-btn" (click)="isMenuOpen = !isMenuOpen">
           <span class="material-icons">{{ isMenuOpen ? 'close' : 'menu' }}</span>
         </button>
 
         <div class="nav-links" [class.active]="isMenuOpen">
-          <a routerLink="/home" (click)="isMenuOpen = false">Explorar</a>
+          <a *ngIf="authService.isLoggedIn()" routerLink="/home" (click)="isMenuOpen = false">Explorar</a>
           
           <ng-container *ngIf="!authService.isLoggedIn()">
+            <a routerLink="/landing" (click)="isMenuOpen = false">Sobre</a>
             <a routerLink="/login" (click)="isMenuOpen = false">Entrar</a>
             <a routerLink="/signup" class="btn-primary" (click)="isMenuOpen = false" style="color: white;">Começar Agora</a>
           </ng-container>
 
           <ng-container *ngIf="authService.isLoggedIn()">
+            <a routerLink="/favorites" (click)="isMenuOpen = false">Favoritos</a>
             <a routerLink="/ad/create" (click)="isMenuOpen = false">Criar Anúncio</a>
             <a routerLink="/chat" (click)="isMenuOpen = false">Mensagens</a>
             <a routerLink="/profile" (click)="isMenuOpen = false">Meu Perfil</a>
@@ -120,6 +123,9 @@ import { AuthService } from './services/auth.service';
 })
 export class AppComponent {
   isMenuOpen = false;
-  constructor(public authService: AuthService) {}
-  logout() { this.authService.logout(); }
+  constructor(public authService: AuthService, private router: Router) {}
+  logout() { 
+    this.authService.logout(); 
+    this.router.navigate(['/landing']);
+  }
 }

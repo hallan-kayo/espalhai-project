@@ -53,4 +53,8 @@ public class Ad {
     // Localização do Anúncio
     private String cidade;
     private String estado;
+
+    private Double preco;
+    private Double salario;
+    private Double valorServico;
 }

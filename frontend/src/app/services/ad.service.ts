@@ -11,11 +11,20 @@ export class AdService {
 
   constructor(private http: HttpClient) {}
 
-  getAds(categoryId?: number, status?: string): Observable<any[]> {
+  getAds(categoryId?: number, status?: string, tipo?: string): Observable<any[]> {
     let params = new HttpParams();
     if (categoryId) params = params.set('categoryId', categoryId.toString());
     if (status) params = params.set('status', status);
+    if (tipo && tipo !== 'TODOS') params = params.set('tipo', tipo);
     return this.http.get<any[]>(`${this.apiUrl}/public`, { params });
+  }
+
+  getFavorites(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/favorites`);
+  }
+
+  toggleFavorite(adId: number): Observable<any> {
+    return this.http.post(`${this.apiUrl}/${adId}/favorite`, {});
   }
 
   createAd(ad: any): Observable<any> {
