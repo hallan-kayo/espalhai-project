@@ -47,7 +47,7 @@ public class Ad {
 
     @ElementCollection
     @CollectionTable(name = "ad_images", joinColumns = @JoinColumn(name = "ad_id"))
-    @Column(name = "image_url")
+    @Column(name = "image_base64", columnDefinition = "LONGTEXT")
     private List<String> imagens;
 
     // Localização do Anúncio

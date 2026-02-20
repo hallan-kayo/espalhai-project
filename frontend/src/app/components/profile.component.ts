@@ -12,12 +12,15 @@ import { AuthService } from '../services/auth.service';
           <!-- Foto e Dados Básicos -->
           <div style="grid-column: span 2; display: flex; align-items: center; gap: 2rem; margin-bottom: 1rem; padding-bottom: 2rem; border-bottom: 1px solid #f1f5f9;">
             <div style="position: relative;">
-              <img [src]="user.fotoUrl || 'https://images.unsplash.com/photo-1633332755192-727a05c4013d?w=200&q=80'" 
+              <img [src]="user.fotoBase64 || 'https://images.unsplash.com/photo-1633332755192-727a05c4013d?w=200&q=80'" 
                    style="width: 120px; height: 120px; border-radius: 50%; object-fit: cover; border: 4px solid #f8fafc; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);">
+              <button type="button" (click)="fileInput.click()" style="position: absolute; bottom: 0; right: 0; background: var(--primary-color); color: white; border: none; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 2px 4px rgba(0,0,0,0.2);">
+                <span class="material-icons" style="font-size: 1.25rem;">camera_alt</span>
+              </button>
+              <input #fileInput type="file" (change)="onFileSelected($event)" style="display: none" accept="image/*">
             </div>
             <div style="flex: 1;">
-              <label style="display: block; font-size: 0.875rem; font-weight: 600; color: #64748b; margin-bottom: 0.5rem;">URL DA FOTO</label>
-              <input type="text" [(ngModel)]="user.fotoUrl" name="fotoUrl" placeholder="https://exemplo.com/foto.jpg" style="width: 100%;">
+              <p style="color: #64748b; font-size: 0.875rem;">Clique no ícone da câmera para alterar sua foto de perfil. Formatos aceitos: JPG, PNG.</p>
             </div>
           </div>
 
@@ -85,6 +88,17 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit() {
     this.authService.getProfile().subscribe(data => this.user = data);
+  }
+
+  onFileSelected(event: any) {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (e: any) => {
+        this.user.fotoBase64 = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
   }
 
   save() {

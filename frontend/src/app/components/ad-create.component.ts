@@ -168,7 +168,11 @@ export class AdCreateComponent implements OnInit {
     const files = event.target.files;
     for (let file of files) {
       if (this.ad.imagens.length < this.maxImages && file.size <= 10 * 1024 * 1024) {
-        this.ad.imagens.push(file.name);
+        const reader = new FileReader();
+        reader.onload = (e: any) => {
+          this.ad.imagens.push(e.target.result);
+        };
+        reader.readAsDataURL(file);
       }
     }
   }

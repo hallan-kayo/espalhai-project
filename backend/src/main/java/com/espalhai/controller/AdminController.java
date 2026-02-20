@@ -36,6 +36,11 @@ public class AdminController {
         return ResponseEntity.ok(userService.toggleStatus(id));
     }
 
+    @PostMapping("/users/admin")
+    public User createAdminUser(@RequestBody User user) {
+        return userService.registerAdmin(user);
+    }
+
     @PostMapping("/categories")
     public Category createCategory(@RequestBody Category category) {
         return categoryRepository.save(category);

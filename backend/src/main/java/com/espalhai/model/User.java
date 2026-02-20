@@ -40,7 +40,8 @@ public class User {
     private String senha;
 
     private String telefone;
-    private String fotoUrl;
+    @Column(columnDefinition = "LONGTEXT")
+    private String fotoBase64;
 
     // Endereço
     private String rua;
@@ -50,10 +51,8 @@ public class User {
     private String estado;
     private String complemento;
 
-    @ElementCollection(fetch = FetchType.EAGER)
-    @CollectionTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"))
-    @Column(name = "role")
-    private Set<String> roles;
+    @Column(nullable = false)
+    private String role;
 
     @Builder.Default
     private boolean ativo = true;

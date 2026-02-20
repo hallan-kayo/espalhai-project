@@ -51,7 +51,7 @@ export class AuthService {
 
   isAdmin(): boolean {
     const user = this.currentUserSubject.value;
-    return user && user.roles && user.roles.includes('ROLE_ADMIN');
+    return user && user.role === "ROLE_ADMIN";
   }
 
   getCurrentUser() {

@@ -197,9 +197,7 @@ export class AdListComponent implements OnInit {
 
   getAdImage(ad: any): string {
     if (ad.imagens && ad.imagens.length > 0) {
-      const img = ad.imagens[0];
-      if (img.startsWith('http')) return img;
-      return this.getPlaceholderByType(ad.tipo);
+      return ad.imagens[0];
     }
     return this.getPlaceholderByType(ad.tipo);
   }

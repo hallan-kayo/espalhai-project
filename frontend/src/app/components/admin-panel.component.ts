@@ -20,19 +20,58 @@ import { HttpClient } from '@angular/common/http';
       <div class="admin-content card">
         <!-- Usuários -->
         <div *ngIf="activeTab === 'users'" class="table-responsive">
+          <!-- Formulário Criar Admin -->
+          <div style="background: #f8fafc; padding: 1.5rem; border-radius: 0.75rem; margin-bottom: 2rem; border: 1px solid #e2e8f0;">
+            <h3 style="font-size: 1rem; font-weight: 700; color: #1e293b; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+              <span class="material-icons" style="font-size: 1.25rem; color: #2563eb;">admin_panel_settings</span>
+              Novo Administrador
+            </h3>
+            <div style="display: flex; gap: 0.75rem; align-items: flex-end;">
+              <div style="flex: 1;">
+                <label style="display: block; font-size: 0.75rem; font-weight: 700; margin-bottom: 0.4rem; color: #64748b;">NOME</label>
+                <input type="text" [(ngModel)]="newAdmin.nome" placeholder="Nome" style="width: 100%; padding: 0.6rem; border-radius: 0.4rem; border: 1px solid #cbd5e1;">
+              </div>
+              <div style="flex: 1;">
+                <label style="display: block; font-size: 0.75rem; font-weight: 700; margin-bottom: 0.4rem; color: #64748b;">EMAIL</label>
+                <input type="email" [(ngModel)]="newAdmin.email" placeholder="Email" style="width: 100%; padding: 0.6rem; border-radius: 0.4rem; border: 1px solid #cbd5e1;">
+              </div>
+              <div style="flex: 1;">
+                <label style="display: block; font-size: 0.75rem; font-weight: 700; margin-bottom: 0.4rem; color: #64748b;">SENHA</label>
+                <input type="password" [(ngModel)]="newAdmin.senha" placeholder="Senha" style="width: 100%; padding: 0.6rem; border-radius: 0.4rem; border: 1px solid #cbd5e1;">
+              </div>
+              <button class="btn-primary" (click)="addAdmin()" style="padding: 0.6rem 1.2rem;">Criar Admin</button>
+            </div>
+          </div>
+
           <table class="admin-table">
             <thead>
               <tr>
-                <th>Nome</th>
+                <th>Usuário</th>
                 <th>Email</th>
+                <th>Role</th>
                 <th>Status</th>
                 <th>Ações</th>
               </tr>
             </thead>
             <tbody>
               <tr *ngFor="let user of users">
-                <td>{{user.nome}}</td>
+                <td>
+                  <div style="display: flex; align-items: center; gap: 0.75rem;">
+                    <div style="width: 32px; height: 32px; border-radius: 50%; overflow: hidden; background: #e2e8f0; display: flex; align-items: center; justify-content: center;">
+                      <img *ngIf="user.fotoBase64" [src]="user.fotoBase64" style="width: 100%; height: 100%; object-fit: cover;">
+                      <span *ngIf="!user.fotoBase64" class="material-icons" style="font-size: 1.25rem; color: #94a3b8;">person</span>
+                    </div>
+                    {{user.nome}}
+                  </div>
+                </td>
                 <td>{{user.email}}</td>
+                <td>
+                  <span [style.background]="user.role === 'ROLE_ADMIN' ? '#e0f2fe' : '#f1f5f9'" 
+                        [style.color]="user.role === 'ROLE_ADMIN' ? '#0369a1' : '#475569'"
+                        style="padding: 0.2rem 0.6rem; border-radius: 2rem; font-size: 0.7rem; font-weight: 700;">
+                    {{user.role === 'ROLE_ADMIN' ? 'ADMIN' : 'USER'}}
+                  </span>
+                </td>
                 <td>
                   <span [class]="user.ativo ? 'badge-success' : 'badge-danger'">
                     {{user.ativo ? 'Ativo' : 'Inativo'}}
@@ -199,6 +238,7 @@ export class AdminPanelComponent implements OnInit {
   users: any[] = [];
   categories: any[] = [];
   newCat = { nome: '' };
+  newAdmin = { nome: '', email: '', senha: '' };
   private apiUrl = 'http://localhost:8080/api/admin';
 
   constructor(private http: HttpClient) {}
@@ -219,6 +259,18 @@ export class AdminPanelComponent implements OnInit {
 
   toggleUser(id: number) {
     this.http.put(`${this.apiUrl}/users/${id}/toggle`, {}).subscribe(() => this.loadUsers());
+  }
+
+  addAdmin() {
+    if (!this.newAdmin.nome || !this.newAdmin.email || !this.newAdmin.senha) {
+      alert('Preencha todos os campos!');
+      return;
+    }
+    this.http.post(`${this.apiUrl}/users/admin`, this.newAdmin).subscribe(() => {
+      alert('Administrador criado com sucesso!');
+      this.newAdmin = { nome: '', email: '', senha: '' };
+      this.loadUsers();
+    });
   }
 
   addCategory() {
