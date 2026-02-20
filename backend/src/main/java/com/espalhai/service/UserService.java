@@ -16,12 +16,14 @@ public class UserService {
     public User register(User user) {
         user.setSenha(passwordEncoder.encode(user.getSenha()));
         user.setRole("ROLE_USER");
+        user.setAtivo(true);
         return userRepository.save(user);
     }
 
     public User registerAdmin(User user) {
         user.setSenha(passwordEncoder.encode(user.getSenha()));
         user.setRole("ROLE_ADMIN");
+        user.setAtivo(true);
         return userRepository.save(user);
     }
 

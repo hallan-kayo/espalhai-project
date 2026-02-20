@@ -27,7 +27,7 @@ import { ToastService } from './services/toast.service';
             <a routerLink="/favorites" (click)="isMenuOpen = false">Favoritos</a>
             <a routerLink="/ad/create" (click)="isMenuOpen = false">Criar Anúncio</a>
             <a routerLink="/chat" (click)="isMenuOpen = false">Mensagens</a>
-            <a routerLink="/profile" (click)="isMenuOpen = false" style="margin-right: 1.5rem;">Meu Perfil</a>
+            <a routerLink="/profile" (click)="isMenuOpen = false" style="margin-right: 1rem;">Meu Perfil</a>
             <a *ngIf="authService.isAdmin()" routerLink="/admin" (click)="isMenuOpen = false" class="admin-link">Painel Admin</a>
             <button (click)="logout(); isMenuOpen = false" class="logout-btn">Sair</button>
           </ng-container>
@@ -134,11 +134,19 @@ import { ToastService } from './services/toast.service';
       font-size: 0.9rem;
       border-top: 1px solid #f1f5f9;
     }
+    .mobile-menu-btn {
+      display: none;
+      background: none;
+      border: 1px solid #e2e8f0;
+      border-radius: 0.5rem;
+      padding: 0.5rem;
+      cursor: pointer;
+    }
     @keyframes slideIn {
       from { transform: translateX(100%); opacity: 0; }
       to { transform: translateX(0); opacity: 1; }
     }
-    @media (max-width: 768px) {
+    @media (max-width: 992px) {
       .mobile-menu-btn { display: block; }
       .nav-links {
         display: none;
@@ -151,8 +159,10 @@ import { ToastService } from './services/toast.service';
         padding: 1.5rem;
         gap: 1rem;
         box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
+        border-bottom: 1px solid #e2e8f0;
       }
       .nav-links.active { display: flex; }
+      .nav-links a, .logout-btn { width: 100%; text-align: left; }
     }
   `]
 })
