@@ -49,27 +49,13 @@ import { Router } from '@angular/router';
             <textarea [(ngModel)]="ad.descricao" rows="6" placeholder="Descreva as principais características, estado de conservação ou detalhes do serviço..." style="width: 100%; padding: 0.85rem; border-radius: 0.75rem; border: 1px solid #cbd5e1; resize: none;"></textarea>
           </div>
 
-          <div *ngIf="ad.tipo === 'PRODUTO'" style="margin-bottom: 1.5rem;">
-            <label style="display: block; font-size: 0.875rem; font-weight: 700; margin-bottom: 0.5rem; color: #475569;">PREÇO (R$)</label>
+          <div style="margin-bottom: 1.5rem;">
+            <label style="display: block; font-size: 0.875rem; font-weight: 700; margin-bottom: 0.5rem; color: #475569;">
+              {{ ad.tipo === 'VAGA' ? 'SALÁRIO' : ad.tipo === 'SERVICO' ? 'VALOR DO SERVIÇO' : 'PREÇO' }} (R$)
+            </label>
             <div style="position: relative;">
               <span style="position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); color: #64748b; font-weight: 600;">R$</span>
-              <input type="number" [(ngModel)]="ad.preco" placeholder="0,00" style="width: 100%; padding: 0.85rem 0.85rem 0.85rem 3rem; border-radius: 0.75rem; border: 1px solid #cbd5e1;">
-            </div>
-          </div>
-
-          <div *ngIf="ad.tipo === 'SERVICO'" style="margin-bottom: 1.5rem;">
-            <label style="display: block; font-size: 0.875rem; font-weight: 700; margin-bottom: 0.5rem; color: #475569;">VALOR DO SERVIÇO (R$)</label>
-            <div style="position: relative;">
-              <span style="position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); color: #64748b; font-weight: 600;">R$</span>
-              <input type="number" [(ngModel)]="ad.valorServico" placeholder="0,00" style="width: 100%; padding: 0.85rem 0.85rem 0.85rem 3rem; border-radius: 0.75rem; border: 1px solid #cbd5e1;">
-            </div>
-          </div>
-
-          <div *ngIf="ad.tipo === 'VAGA'" style="margin-bottom: 1.5rem;">
-            <label style="display: block; font-size: 0.875rem; font-weight: 700; margin-bottom: 0.5rem; color: #475569;">SALÁRIO (R$)</label>
-            <div style="position: relative;">
-              <span style="position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); color: #64748b; font-weight: 600;">R$</span>
-              <input type="number" [(ngModel)]="ad.salario" placeholder="0,00" style="width: 100%; padding: 0.85rem 0.85rem 0.85rem 3rem; border-radius: 0.75rem; border: 1px solid #cbd5e1;">
+              <input type="number" [(ngModel)]="ad.valor" placeholder="0,00" style="width: 100%; padding: 0.85rem 0.85rem 0.85rem 3rem; border-radius: 0.75rem; border: 1px solid #cbd5e1;">
             </div>
           </div>
         </div>
@@ -114,7 +100,6 @@ import { Router } from '@angular/router';
               <p style="font-size: 0.7rem; color: #94a3b8; margin-top: 0.4rem;">{{ ad.imagens.length }} de {{ maxImages }} fotos</p>
             </div>
 
-            <!-- Preview das Imagens -->
             <div *ngIf="ad.imagens.length > 0" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem; margin-top: 1rem;">
               <div *ngFor="let img of ad.imagens; let i = index" style="position: relative; aspect-ratio: 1; border-radius: 0.5rem; overflow: hidden; border: 1px solid #e2e8f0;">
                 <img [src]="img" style="width: 100%; height: 100%; object-fit: cover;">
@@ -138,7 +123,7 @@ import { Router } from '@angular/router';
   `
 })
 export class AdCreateComponent implements OnInit {
-  ad: any = { tipo: 'PRODUTO', titulo: '', descricao: '', imagens: [], categoria: { id: null }, estado: null, cidade: null };
+  ad: any = { tipo: 'PRODUTO', titulo: '', descricao: '', imagens: [], categoria: { id: null }, estado: null, cidade: null, valor: null };
   minImages = 1;
   maxImages = 10;
   categories: any[] = [];
@@ -194,7 +179,6 @@ export class AdCreateComponent implements OnInit {
     else if (this.ad.tipo === 'SERVICO') { this.minImages = 0; this.maxImages = 3; }
     else if (this.ad.tipo === 'VAGA') { this.minImages = 1; this.maxImages = 3; }
     
-    // Se mudar o tipo e o número atual de imagens exceder o novo máximo, removemos o excesso
     if (this.ad.imagens.length > this.maxImages) {
       this.ad.imagens = this.ad.imagens.slice(0, this.maxImages);
       this.toastService.info(`O número de imagens foi ajustado para o limite de ${this.maxImages} deste tipo.`);
@@ -206,14 +190,12 @@ export class AdCreateComponent implements OnInit {
     const currentCount = this.ad.imagens.length;
     const selectedCount = files.length;
 
-    // Trava rigorosa: Se o total (atual + selecionado) passar do máximo, cancelamos TUDO
     if (currentCount + selectedCount > this.maxImages) {
       this.toastService.error(`Limite excedido! Você pode ter no máximo ${this.maxImages} fotos. Seleção cancelada.`);
-      event.target.value = ''; // Limpa o input
+      event.target.value = '';
       return;
     }
 
-    // Processa as imagens selecionadas
     for (let i = 0; i < files.length; i++) {
       const file = files[i];
       if (file.size > 10 * 1024 * 1024) {
@@ -228,7 +210,7 @@ export class AdCreateComponent implements OnInit {
       reader.readAsDataURL(file);
     }
     
-    event.target.value = ''; // Limpa o input para permitir selecionar os mesmos arquivos novamente se necessário
+    event.target.value = '';
   }
 
   removeImage(index: number) {
@@ -239,15 +221,10 @@ export class AdCreateComponent implements OnInit {
     const basicInfo = this.ad.titulo && this.ad.descricao && 
            this.ad.imagens.length >= this.minImages && 
            this.ad.imagens.length <= this.maxImages &&
-           this.ad.estado && this.ad.cidade;
+           this.ad.estado && this.ad.cidade &&
+           this.ad.valor && this.ad.valor > 0;
     
-    if (!basicInfo) return false;
-
-    if (this.ad.tipo === 'PRODUTO') return !!this.ad.preco && this.ad.preco > 0;
-    if (this.ad.tipo === 'SERVICO') return !!this.ad.valorServico && this.ad.valorServico >= 0;
-    if (this.ad.tipo === 'VAGA') return !!this.ad.salario && this.ad.salario > 0;
-
-    return true;
+    return !!basicInfo;
   }
 
   save() {

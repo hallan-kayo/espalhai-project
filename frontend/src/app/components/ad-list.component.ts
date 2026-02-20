@@ -214,7 +214,6 @@ export class AdListComponent implements OnInit {
         this.loadFavorites();
         this.toastService.success(wasFavorite ? 'Removido dos favoritos' : 'Adicionado aos favoritos');
         
-        // Se estivermos na tela de favoritos, precisamos recarregar os anúncios para refletir a remoção
         if (this.router.url.includes('/favorites')) {
           this.loadAds();
         }
@@ -259,9 +258,9 @@ export class AdListComponent implements OnInit {
   }
 
   getPriceLabel(ad: any): string {
-    if (ad.tipo === 'PRODUTO' && ad.preco) return `R$ ${ad.preco.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`;
-    if (ad.tipo === 'SERVICO' && ad.valorServico) return `R$ ${ad.valorServico.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`;
-    if (ad.tipo === 'VAGA' && ad.salario) return `R$ ${ad.salario.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`;
+    if (ad.valor) {
+      return `R$ ${ad.valor.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}`;
+    }
     return 'Consulte';
   }
 

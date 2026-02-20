@@ -54,7 +54,7 @@ public class Ad {
     private String cidade;
     private String estado;
 
-    private Double preco;
-    private Double salario;
-    private Double valorServico;
+    // Campo unificado para Preço, Salário ou Valor do Serviço
+    @Column(nullable = false)
+    private Double valor;
 }

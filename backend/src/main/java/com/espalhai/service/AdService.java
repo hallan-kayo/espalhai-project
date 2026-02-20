@@ -17,7 +17,7 @@ public class AdService {
     private final CategoryRepository categoryRepository;
 
     public Ad createAd(Ad ad) {
-        validateImages(ad);
+        validateAd(ad);
         if (ad.getCategoria() == null || ad.getCategoria().getId() == null) {
             Category defaultCat = categoryRepository.findAll().stream().findFirst()
                 .orElseGet(() -> categoryRepository.save(new Category(null, "Geral", "Categoria Geral")));
@@ -27,17 +27,23 @@ public class AdService {
         return adRepository.save(ad);
     }
 
-    private void validateImages(Ad ad) {
+    private void validateAd(Ad ad) {
         int count = ad.getImagens() != null ? ad.getImagens().size() : 0;
+        
+        // Validação de Valor Unificado
+        if (ad.getValor() == null || ad.getValor() <= 0) {
+            String campo = ad.getTipo() == AdType.VAGA ? "Salário" : 
+                          ad.getTipo() == AdType.SERVICO ? "Valor do serviço" : "Preço";
+            throw new RuntimeException(campo + " deve ser maior que zero.");
+        }
+
+        // Validação de Imagens por Tipo
         if (ad.getTipo() == AdType.PRODUTO) {
             if (count < 1 || count > 10) throw new RuntimeException("Produtos devem ter entre 1 e 10 imagens.");
-            if (ad.getPreco() == null || ad.getPreco() <= 0) throw new RuntimeException("Preço é obrigatório para produtos.");
         } else if (ad.getTipo() == AdType.SERVICO) {
             if (count > 3) throw new RuntimeException("Serviços podem ter no máximo 3 imagens.");
-            if (ad.getValorServico() == null || ad.getValorServico() <= 0) throw new RuntimeException("Valor do serviço é obrigatório.");
         } else if (ad.getTipo() == AdType.VAGA) {
             if (count < 1 || count > 3) throw new RuntimeException("Vagas devem ter entre 1 e 3 imagens.");
-            if (ad.getSalario() == null || ad.getSalario() <= 0) throw new RuntimeException("Salário é obrigatório para vagas.");
         }
     }
 
