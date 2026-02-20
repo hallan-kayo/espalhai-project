@@ -196,7 +196,10 @@ export class AdListComponent implements OnInit {
   }
 
   loadFavorites() {
-    this.adService.getFavorites().subscribe(data => this.favorites = data);
+    this.adService.getFavorites().subscribe({
+      next: (data) => this.favorites = data,
+      error: () => this.toastService.error('Erro ao carregar favoritos.')
+    });
   }
 
   isFavorite(ad: any): boolean {
@@ -205,11 +208,16 @@ export class AdListComponent implements OnInit {
 
   toggleFavorite(event: Event, ad: any) {
     event.stopPropagation();
+    const wasFavorite = this.isFavorite(ad);
     this.adService.toggleFavorite(ad.id).subscribe({
       next: () => {
         this.loadFavorites();
-        const isFav = this.isFavorite(ad);
-        this.toastService.success(isFav ? 'Removido dos favoritos' : 'Adicionado aos favoritos');
+        this.toastService.success(wasFavorite ? 'Removido dos favoritos' : 'Adicionado aos favoritos');
+        
+        // Se estivermos na tela de favoritos, precisamos recarregar os anúncios para refletir a remoção
+        if (this.router.url.includes('/favorites')) {
+          this.loadAds();
+        }
       },
       error: () => this.toastService.error('Erro ao atualizar favoritos.')
     });

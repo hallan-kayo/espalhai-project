@@ -22,9 +22,9 @@ import { Router } from '@angular/router';
               <button *ngFor="let t of types" 
                       type="button"
                       (click)="ad.tipo = t.value; onTypeChange()"
-                      [style.background]="ad.tipo === t.value ? 'var(--primary-color)' : '#f8fafc'"
+                      [style.background]="ad.tipo === t.value ? '#2563eb' : '#f8fafc'"
                       [style.color]="ad.tipo === t.value ? 'white' : '#64748b'"
-                      [style.border-color]="ad.tipo === t.value ? 'var(--primary-color)' : '#e2e8f0'"
+                      [style.border-color]="ad.tipo === t.value ? '#2563eb' : '#e2e8f0'"
                       style="flex: 1; padding: 1rem; border-radius: 1rem; border: 1px solid; font-weight: 600; cursor: pointer; transition: all 0.2s;">
                 {{ t.label }}
               </button>
@@ -77,7 +77,7 @@ import { Router } from '@angular/router';
         <div style="display: flex; flex-direction: column; gap: 1.5rem;">
           <div style="background: white; padding: 1.5rem; border-radius: 1.5rem; border: 1px solid #e2e8f0; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);">
             <h4 style="margin: 0 0 1.25rem 0; font-size: 0.9rem; font-weight: 800; text-transform: uppercase; color: #64748b; display: flex; align-items: center; gap: 0.5rem;">
-              <span class="material-icons" style="font-size: 1.25rem; color: var(--primary-color);">location_on</span>
+              <span class="material-icons" style="font-size: 1.25rem; color: #2563eb;">location_on</span>
               Localização
             </h4>
             
@@ -100,18 +100,28 @@ import { Router } from '@angular/router';
 
           <div style="background: white; padding: 1.5rem; border-radius: 1.5rem; border: 1px solid #e2e8f0; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);">
             <h4 style="margin: 0 0 1.25rem 0; font-size: 0.9rem; font-weight: 800; text-transform: uppercase; color: #64748b; display: flex; align-items: center; gap: 0.5rem;">
-              <span class="material-icons" style="font-size: 1.25rem; color: var(--primary-color);">photo_camera</span>
+              <span class="material-icons" style="font-size: 1.25rem; color: #2563eb;">photo_camera</span>
               Imagens
             </h4>
             
             <div style="border: 2px dashed #e2e8f0; border-radius: 1rem; padding: 1.5rem; text-align: center; cursor: pointer; transition: all 0.2s;" 
                  (click)="fileInput.click()"
-                 onmouseover="this.style.borderColor='var(--primary-color)';this.style.background='#f8fafc'" 
+                 onmouseover="this.style.borderColor='#2563eb';this.style.background='#f8fafc'" 
                  onmouseout="this.style.borderColor='#e2e8f0';this.style.background='transparent'">
               <input #fileInput type="file" (change)="onFileSelected($event)" multiple style="display: none">
               <i class="material-icons" style="font-size: 2.5rem; color: #94a3b8; margin-bottom: 0.5rem;">add_a_photo</i>
               <p style="font-size: 0.8rem; font-weight: 600; margin: 0; color: #475569;">Clique para enviar</p>
               <p style="font-size: 0.7rem; color: #94a3b8; margin-top: 0.4rem;">{{ ad.imagens.length }} de {{ maxImages }} fotos</p>
+            </div>
+
+            <!-- Preview das Imagens -->
+            <div *ngIf="ad.imagens.length > 0" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem; margin-top: 1rem;">
+              <div *ngFor="let img of ad.imagens; let i = index" style="position: relative; aspect-ratio: 1; border-radius: 0.5rem; overflow: hidden; border: 1px solid #e2e8f0;">
+                <img [src]="img" style="width: 100%; height: 100%; object-fit: cover;">
+                <button (click)="removeImage(i)" style="position: absolute; top: 2px; right: 2px; background: rgba(239, 68, 68, 0.9); color: white; border: none; border-radius: 50%; width: 20px; height: 20px; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 12px;">
+                  <span class="material-icons" style="font-size: 14px;">close</span>
+                </button>
+              </div>
             </div>
 
             <div style="margin-top: 1rem; padding: 0.75rem; background: #f0f9ff; border-radius: 0.75rem; font-size: 0.75rem; color: #0369a1;">
@@ -157,7 +167,6 @@ export class AdCreateComponent implements OnInit {
       next: (data) => {
         this.categories = data;
         if (this.categories.length === 0) {
-          // Fallback se não houver categorias no banco
           this.categories = [{ id: 1, nome: 'Geral' }];
         }
         if (this.categories.length > 0 && !this.ad.categoria.id) {
@@ -184,32 +193,46 @@ export class AdCreateComponent implements OnInit {
     if (this.ad.tipo === 'PRODUTO') { this.minImages = 1; this.maxImages = 10; }
     else if (this.ad.tipo === 'SERVICO') { this.minImages = 0; this.maxImages = 3; }
     else if (this.ad.tipo === 'VAGA') { this.minImages = 1; this.maxImages = 3; }
-    if (this.ad.imagens.length > this.maxImages) this.ad.imagens = this.ad.imagens.slice(0, this.maxImages);
+    
+    // Se mudar o tipo e o número atual de imagens exceder o novo máximo, removemos o excesso
+    if (this.ad.imagens.length > this.maxImages) {
+      this.ad.imagens = this.ad.imagens.slice(0, this.maxImages);
+      this.toastService.info(`O número de imagens foi ajustado para o limite de ${this.maxImages} deste tipo.`);
+    }
   }
 
   onFileSelected(event: any) {
-    const files = event.target.files;
-    let limitReached = false;
+    const files: FileList = event.target.files;
+    const currentCount = this.ad.imagens.length;
+    const selectedCount = files.length;
 
-    for (let file of files) {
-      if (this.ad.imagens.length < this.maxImages) {
-        if (file.size <= 10 * 1024 * 1024) {
-          const reader = new FileReader();
-          reader.onload = (e: any) => {
-            this.ad.imagens.push(e.target.result);
-          };
-          reader.readAsDataURL(file);
-        } else {
-          this.toastService.error(`A imagem ${file.name} é muito grande (máx 10MB).`);
-        }
-      } else {
-        limitReached = true;
+    // Trava rigorosa: Se o total (atual + selecionado) passar do máximo, cancelamos TUDO
+    if (currentCount + selectedCount > this.maxImages) {
+      this.toastService.error(`Limite excedido! Você pode ter no máximo ${this.maxImages} fotos. Seleção cancelada.`);
+      event.target.value = ''; // Limpa o input
+      return;
+    }
+
+    // Processa as imagens selecionadas
+    for (let i = 0; i < files.length; i++) {
+      const file = files[i];
+      if (file.size > 10 * 1024 * 1024) {
+        this.toastService.error(`A imagem ${file.name} é muito grande (máx 10MB).`);
+        continue;
       }
-    }
 
-    if (limitReached) {
-      this.toastService.error(`Você atingiu o limite de ${this.maxImages} fotos para este tipo de anúncio.`);
+      const reader = new FileReader();
+      reader.onload = (e: any) => {
+        this.ad.imagens.push(e.target.result);
+      };
+      reader.readAsDataURL(file);
     }
+    
+    event.target.value = ''; // Limpa o input para permitir selecionar os mesmos arquivos novamente se necessário
+  }
+
+  removeImage(index: number) {
+    this.ad.imagens.splice(index, 1);
   }
 
   isValid() {
@@ -221,7 +244,7 @@ export class AdCreateComponent implements OnInit {
     if (!basicInfo) return false;
 
     if (this.ad.tipo === 'PRODUTO') return !!this.ad.preco && this.ad.preco > 0;
-    if (this.ad.tipo === 'SERVICO') return !!this.ad.valorServico && this.ad.valorServico > 0;
+    if (this.ad.tipo === 'SERVICO') return !!this.ad.valorServico && this.ad.valorServico >= 0;
     if (this.ad.tipo === 'VAGA') return !!this.ad.salario && this.ad.salario > 0;
 
     return true;
