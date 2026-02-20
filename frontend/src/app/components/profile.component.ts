@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service';
+import { ToastService } from '../services/toast.service';
 
 @Component({
   selector: 'app-profile',
@@ -84,10 +85,16 @@ import { AuthService } from '../services/auth.service';
 export class ProfileComponent implements OnInit {
   user: any = {};
 
-  constructor(private authService: AuthService) {}
+  constructor(
+    private authService: AuthService,
+    private toastService: ToastService
+  ) {}
 
   ngOnInit() {
-    this.authService.getProfile().subscribe(data => this.user = data);
+    this.authService.getProfile().subscribe({
+      next: (data) => this.user = data,
+      error: () => this.toastService.error('Erro ao carregar perfil.')
+    });
   }
 
   onFileSelected(event: any) {
@@ -102,8 +109,9 @@ export class ProfileComponent implements OnInit {
   }
 
   save() {
-    this.authService.updateProfile(this.user).subscribe(() => {
-      alert('Perfil atualizado com sucesso!');
+    this.authService.updateProfile(this.user).subscribe({
+      next: () => this.toastService.success('Perfil atualizado com sucesso!'),
+      error: () => this.toastService.error('Erro ao atualizar perfil.')
     });
   }
 }

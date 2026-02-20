@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AdService } from '../services/ad.service';
+import { Router } from '@angular/router';
+import { ToastService } from '../services/toast.service';
 
 @Component({
   selector: 'app-favorites',
@@ -23,7 +25,7 @@ import { AdService } from '../services/ad.service';
 
       <div *ngIf="!loading && favorites.length > 0" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 30px;">
         <div *ngFor="let ad of favorites" style="background: white; border-radius: 20px; overflow: hidden; border: 1px solid #e2e8f0; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); transition: transform 0.2s ease-in-out;">
-          <div style="position: relative; height: 200px; overflow: hidden;">
+          <div style="position: relative; height: 200px; overflow: hidden; cursor: pointer;" (click)="viewDetails(ad)">
             <img [src]="getAdImage(ad)" [alt]="ad.titulo" (error)="handleImageError($event, ad)" style="width: 100%; height: 100%; object-fit: cover;">
             <div style="position: absolute; top: 12px; left: 12px;">
               <span [style.background]="getTypeColor(ad.tipo)" style="color: white; padding: 0.4rem 0.8rem; border-radius: 2rem; font-size: 0.75rem; font-weight: 700; text-transform: uppercase;">
@@ -34,7 +36,7 @@ import { AdService } from '../services/ad.service';
           
           <div style="padding: 1.5rem;">
             <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.75rem;">
-              <h3 style="font-size: 1.25rem; font-weight: 700; color: #1e293b; margin: 0;">{{ad.titulo}}</h3>
+              <h3 style="font-size: 1.25rem; font-weight: 700; color: #1e293b; margin: 0; cursor: pointer;" (click)="viewDetails(ad)">{{ad.titulo}}</h3>
               <button (click)="removeFavorite(ad)" style="background: none; border: none; cursor: pointer; color: #ef4444; padding: 0;">
                 <span class="material-icons" style="font-size: 1.5rem;">favorite</span>
               </button>
@@ -48,7 +50,10 @@ import { AdService } from '../services/ad.service';
               <div style="font-weight: 800; color: #2563eb; font-size: 1.1rem;">
                 {{ getPriceLabel(ad) }}
               </div>
-              <a [routerLink]="['/home']" style="color: #64748b; font-weight: 600; text-decoration: none; font-size: 0.875rem;">Ver Detalhes</a>
+              <button (click)="viewDetails(ad)" style="background: none; border: none; color: #64748b; font-weight: 600; cursor: pointer; font-size: 0.875rem; display: flex; align-items: center; gap: 4px;">
+                Ver Detalhes
+                <span class="material-icons" style="font-size: 1.1rem;">chevron_right</span>
+              </button>
             </div>
           </div>
         </div>
@@ -60,7 +65,11 @@ export class FavoritesComponent implements OnInit {
   favorites: any[] = [];
   loading = true;
 
-  constructor(private adService: AdService) {}
+  constructor(
+    private adService: AdService,
+    private router: Router,
+    private toastService: ToastService
+  ) {}
 
   ngOnInit() {
     this.loadFavorites();
@@ -74,20 +83,28 @@ export class FavoritesComponent implements OnInit {
       },
       error: () => {
         this.loading = false;
+        this.toastService.error('Erro ao carregar favoritos.');
       }
     });
   }
 
   removeFavorite(ad: any) {
-    this.adService.toggleFavorite(ad.id).subscribe(() => {
-      this.favorites = this.favorites.filter(f => f.id !== ad.id);
+    this.adService.toggleFavorite(ad.id).subscribe({
+      next: () => {
+        this.favorites = this.favorites.filter(f => f.id !== ad.id);
+        this.toastService.success('Removido dos favoritos.');
+      },
+      error: () => this.toastService.error('Erro ao remover favorito.')
     });
+  }
+
+  viewDetails(ad: any) {
+    this.router.navigate(['/home'], { queryParams: { adId: ad.id } });
   }
 
   getAdImage(ad: any): string {
     if (ad.imagens && ad.imagens.length > 0) {
-      const img = ad.imagens[0];
-      return img.startsWith('http') ? img : this.getPlaceholderByType(ad.tipo);
+      return ad.imagens[0];
     }
     return this.getPlaceholderByType(ad.tipo);
   }

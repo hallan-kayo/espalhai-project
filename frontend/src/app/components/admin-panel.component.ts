@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { ToastService } from '../services/toast.service';
 
 @Component({
   selector: 'app-admin-panel',
@@ -241,7 +242,10 @@ export class AdminPanelComponent implements OnInit {
   newAdmin = { nome: '', email: '', senha: '' };
   private apiUrl = 'http://localhost:8080/api/admin';
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private toastService: ToastService
+  ) {}
 
   ngOnInit() {
     this.loadUsers();
@@ -249,40 +253,64 @@ export class AdminPanelComponent implements OnInit {
   }
 
   loadUsers() {
-    this.http.get<any[]>(`${this.apiUrl}/users`).subscribe(data => this.users = data);
+    this.http.get<any[]>(`${this.apiUrl}/users`).subscribe({
+      next: (data) => this.users = data,
+      error: () => this.toastService.error('Erro ao carregar usuários.')
+    });
   }
 
   loadCategories() {
-    // Usando a rota pública para listar categorias inicialmente ou a de admin
-    this.http.get<any[]>('http://localhost:8080/api/public/categories').subscribe(data => this.categories = data);
+    this.http.get<any[]>('http://localhost:8080/api/public/categories').subscribe({
+      next: (data) => this.categories = data,
+      error: () => this.toastService.error('Erro ao carregar categorias.')
+    });
   }
 
   toggleUser(id: number) {
-    this.http.put(`${this.apiUrl}/users/${id}/toggle`, {}).subscribe(() => this.loadUsers());
+    this.http.put(`${this.apiUrl}/users/${id}/toggle`, {}).subscribe({
+      next: () => {
+        this.toastService.success('Status do usuário atualizado.');
+        this.loadUsers();
+      },
+      error: () => this.toastService.error('Erro ao atualizar status do usuário.')
+    });
   }
 
   addAdmin() {
     if (!this.newAdmin.nome || !this.newAdmin.email || !this.newAdmin.senha) {
-      alert('Preencha todos os campos!');
+      this.toastService.error('Preencha todos os campos!');
       return;
     }
-    this.http.post(`${this.apiUrl}/users/admin`, this.newAdmin).subscribe(() => {
-      alert('Administrador criado com sucesso!');
-      this.newAdmin = { nome: '', email: '', senha: '' };
-      this.loadUsers();
+    this.http.post(`${this.apiUrl}/users/admin`, this.newAdmin).subscribe({
+      next: () => {
+        this.toastService.success('Administrador criado com sucesso!');
+        this.newAdmin = { nome: '', email: '', senha: '' };
+        this.loadUsers();
+      },
+      error: () => this.toastService.error('Erro ao criar administrador.')
     });
   }
 
   addCategory() {
     if (this.newCat.nome) {
-      this.http.post(`${this.apiUrl}/categories`, this.newCat).subscribe(() => {
-        this.newCat.nome = '';
-        this.loadCategories();
+      this.http.post(`${this.apiUrl}/categories`, this.newCat).subscribe({
+        next: () => {
+          this.toastService.success('Categoria adicionada.');
+          this.newCat.nome = '';
+          this.loadCategories();
+        },
+        error: () => this.toastService.error('Erro ao adicionar categoria.')
       });
     }
   }
 
   deleteCategory(id: number) {
-    this.http.delete(`${this.apiUrl}/categories/${id}`).subscribe(() => this.loadCategories());
+    this.http.delete(`${this.apiUrl}/categories/${id}`).subscribe({
+      next: () => {
+        this.toastService.success('Categoria excluída.');
+        this.loadCategories();
+      },
+      error: () => this.toastService.error('Erro ao excluir categoria.')
+    });
   }
 }

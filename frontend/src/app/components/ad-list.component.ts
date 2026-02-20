@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AdService } from '../services/ad.service';
+import { Router, ActivatedRoute } from '@angular/router';
+import { ToastService } from '../services/toast.service';
 
 @Component({
   selector: 'app-ad-list',
@@ -65,7 +67,6 @@ import { AdService } from '../services/ad.service';
               </button>
             </div>
 
-            <!-- Localização -->
             <div style="display: flex; align-items: center; gap: 0.4rem; color: #64748b; font-size: 0.8rem; margin-bottom: 1rem;">
               <span class="material-icons" style="font-size: 1rem; color: #94a3b8;">location_on</span>
               {{ ad.cidade && ad.estado ? ad.cidade + ' - ' + ad.estado : 'Localização não informada' }}
@@ -88,15 +89,28 @@ import { AdService } from '../services/ad.service';
         </div>
       </div>
 
-      <!-- Modal de Detalhes -->
+      <!-- Modal de Detalhes com Carrossel -->
       <div *ngIf="selectedAd" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); display: flex; justify-content: center; align-items: center; z-index: 1000; padding: 20px;" (click)="closeDetails()">
         <div style="background: white; width: 100%; max-width: 800px; max-height: 90vh; border-radius: 24px; overflow-y: auto; position: relative;" (click)="$event.stopPropagation()">
           <button (click)="closeDetails()" style="position: absolute; top: 20px; right: 20px; background: white; border: none; border-radius: 50%; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); z-index: 10;">
             <span class="material-icons">close</span>
           </button>
           
-          <div style="height: 400px; width: 100%; background: #f1f5f9;">
-            <img [src]="getAdImage(selectedAd)" [alt]="selectedAd.titulo" style="width: 100%; height: 100%; object-fit: contain;">
+          <div style="height: 400px; width: 100%; background: #000; position: relative; display: flex; align-items: center; justify-content: center;">
+            <img [src]="selectedAd.imagens && selectedAd.imagens.length > 0 ? selectedAd.imagens[currentImgIndex] : getPlaceholderByType(selectedAd.tipo)" 
+                 style="max-width: 100%; max-height: 100%; object-fit: contain;">
+            
+            <ng-container *ngIf="selectedAd.imagens && selectedAd.imagens.length > 1">
+              <button (click)="prevImage($event)" style="position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.8); border: none; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 2px 4px rgba(0,0,0,0.2);">
+                <span class="material-icons">chevron_left</span>
+              </button>
+              <button (click)="nextImage($event)" style="position: absolute; right: 1rem; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.8); border: none; width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 2px 4px rgba(0,0,0,0.2);">
+                <span class="material-icons">chevron_right</span>
+              </button>
+              <div style="position: absolute; bottom: 1rem; left: 50%; transform: translateX(-50%); background: rgba(0,0,0,0.6); color: white; padding: 4px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: 700;">
+                {{currentImgIndex + 1}} / {{selectedAd.imagens.length}}
+              </div>
+            </ng-container>
           </div>
           
           <div style="padding: 40px;">
@@ -123,8 +137,9 @@ import { AdService } from '../services/ad.service';
 
             <div style="display: flex; justify-content: space-between; align-items: center; padding-top: 30px; border-top: 1px solid #e2e8f0;">
               <div style="display: flex; align-items: center; gap: 15px;">
-                <div style="width: 48px; height: 48px; background: #e2e8f0; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
-                  <span class="material-icons" style="color: #64748b;">person</span>
+                <div style="width: 48px; height: 48px; border-radius: 50%; overflow: hidden; background: #e2e8f0; display: flex; align-items: center; justify-content: center;">
+                  <img *ngIf="selectedAd.usuario?.fotoBase64" [src]="selectedAd.usuario?.fotoBase64" style="width: 100%; height: 100%; object-fit: cover;">
+                  <span *ngIf="!selectedAd.usuario?.fotoBase64" class="material-icons" style="color: #64748b;">person</span>
                 </div>
                 <div>
                   <div style="font-weight: 700; color: #1e293b;">{{selectedAd.usuario?.nome}}</div>
@@ -148,17 +163,32 @@ export class AdListComponent implements OnInit {
   favorites: any[] = [];
   filter = { categoryId: null, status: 'ATIVO', tipo: 'TODOS' };
   selectedAd: any = null;
+  currentImgIndex: number = 0;
 
-  constructor(private adService: AdService) {}
+  constructor(
+    private adService: AdService, 
+    private router: Router,
+    private route: ActivatedRoute,
+    private toastService: ToastService
+  ) {}
 
   ngOnInit() {
     this.loadAds();
     this.loadCategories();
     this.loadFavorites();
+
+    this.route.queryParams.subscribe(params => {
+      if (params['adId']) {
+        this.openAdById(params['adId']);
+      }
+    });
   }
 
   loadAds() {
-    this.adService.getAds(this.filter.categoryId || undefined, this.filter.status, this.filter.tipo).subscribe(data => this.ads = data);
+    this.adService.getAds(this.filter.categoryId || undefined, this.filter.status, this.filter.tipo).subscribe({
+      next: (data) => this.ads = data,
+      error: () => this.toastService.error('Erro ao carregar anúncios.')
+    });
   }
 
   loadCategories() {
@@ -175,17 +205,49 @@ export class AdListComponent implements OnInit {
 
   toggleFavorite(event: Event, ad: any) {
     event.stopPropagation();
-    this.adService.toggleFavorite(ad.id).subscribe(() => {
-      this.loadFavorites();
+    this.adService.toggleFavorite(ad.id).subscribe({
+      next: () => {
+        this.loadFavorites();
+        const isFav = this.isFavorite(ad);
+        this.toastService.success(isFav ? 'Removido dos favoritos' : 'Adicionado aos favoritos');
+      },
+      error: () => this.toastService.error('Erro ao atualizar favoritos.')
+    });
+  }
+
+  openAdById(id: number) {
+    this.adService.getAds().subscribe(ads => {
+      const ad = ads.find(a => a.id == id);
+      if (ad) this.openDetails(ad);
     });
   }
 
   openDetails(ad: any) {
     this.selectedAd = ad;
+    this.currentImgIndex = 0;
   }
 
   closeDetails() {
     this.selectedAd = null;
+    this.currentImgIndex = 0;
+  }
+
+  nextImage(event: Event) {
+    event.stopPropagation();
+    if (this.selectedAd.imagens && this.currentImgIndex < this.selectedAd.imagens.length - 1) {
+      this.currentImgIndex++;
+    } else {
+      this.currentImgIndex = 0;
+    }
+  }
+
+  prevImage(event: Event) {
+    event.stopPropagation();
+    if (this.selectedAd.imagens && this.currentImgIndex > 0) {
+      this.currentImgIndex--;
+    } else {
+      this.currentImgIndex = this.selectedAd.imagens.length - 1;
+    }
   }
 
   getPriceLabel(ad: any): string {
@@ -220,9 +282,5 @@ export class AdListComponent implements OnInit {
       case 'VAGA': return 'linear-gradient(135deg, #f59e0b, #d97706)';
       default: return '#94a3b8';
     }
-  }
-
-  toggleFavorite(ad: any) {
-    alert('Adicionado aos favoritos!');
   }
 }

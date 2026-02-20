@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AuthService } from './services/auth.service';
 import { Router } from '@angular/router';
+import { ToastService } from './services/toast.service';
 
 @Component({
   selector: 'app-root',
@@ -26,7 +27,7 @@ import { Router } from '@angular/router';
             <a routerLink="/favorites" (click)="isMenuOpen = false">Favoritos</a>
             <a routerLink="/ad/create" (click)="isMenuOpen = false">Criar Anúncio</a>
             <a routerLink="/chat" (click)="isMenuOpen = false">Mensagens</a>
-            <a routerLink="/profile" (click)="isMenuOpen = false">Meu Perfil</a>
+            <a routerLink="/profile" (click)="isMenuOpen = false" style="margin-right: 1.5rem;">Meu Perfil</a>
             <a *ngIf="authService.isAdmin()" routerLink="/admin" (click)="isMenuOpen = false" class="admin-link">Painel Admin</a>
             <button (click)="logout(); isMenuOpen = false" class="logout-btn">Sair</button>
           </ng-container>
@@ -41,8 +42,31 @@ import { Router } from '@angular/router';
     <footer class="footer">
       <p>&copy; 2026 Espalhaí - Conectando você ao que importa.</p>
     </footer>
+
+    <!-- Toast Container -->
+    <div style="position: fixed; top: 20px; right: 20px; z-index: 9999; display: flex; flex-direction: column; gap: 10px;">
+      <div *ngFor="let toast of toastService.toasts$ | async" 
+           [style.background]="toast.type === 'success' ? '#10b981' : toast.type === 'error' ? '#ef4444' : '#3b82f6'"
+           style="color: white; padding: 12px 24px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); display: flex; align-items: center; gap: 10px; animation: slideIn 0.3s ease-out;">
+        <span class="material-icons" style="font-size: 1.25rem;">
+          {{ toast.type === 'success' ? 'check_circle' : toast.type === 'error' ? 'error' : 'info' }}
+        </span>
+        <span style="font-weight: 600;">{{ toast.message }}</span>
+        <button (click)="toastService.remove(toast.id)" style="background: none; border: none; color: white; cursor: pointer; display: flex; align-items: center;">
+          <span class="material-icons" style="font-size: 1.25rem;">close</span>
+        </button>
+      </div>
+    </div>
   `,
   styles: [`
+    .navbar {
+      background: white;
+      border-bottom: 1px solid #e2e8f0;
+      height: 70px;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
     .nav-container {
       max-width: 1200px;
       margin: 0 auto;
@@ -52,20 +76,37 @@ import { Router } from '@angular/router';
       padding: 0 1.5rem;
       height: 100%;
     }
-
-    .mobile-menu-btn {
-      display: none;
-      background: none;
-      border: none;
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: #2563eb;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+    .nav-links a {
+      color: #64748b;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover {
       color: #1e293b;
-      cursor: pointer;
     }
-
-    .admin-link {
-      color: #ef4444 !important;
-      font-weight: 700 !important;
+    .btn-primary {
+      background: #2563eb;
+      color: white !important;
+      padding: 0.6rem 1.2rem;
+      border-radius: 0.5rem;
+      font-weight: 700;
     }
-
     .logout-btn {
       background: none;
       border: 1px solid #e2e8f0;
@@ -76,24 +117,29 @@ import { Router } from '@angular/router';
       font-weight: 600;
       transition: all 0.2s;
     }
-
     .logout-btn:hover {
       background: #f1f5f9;
       color: #1e293b;
     }
-
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem;
+      min-height: calc(100vh - 140px);
+    }
     .footer {
       text-align: center;
-      padding: 3rem;
+      padding: 2rem;
       color: #94a3b8;
       font-size: 0.9rem;
+      border-top: 1px solid #f1f5f9;
     }
-
+    @keyframes slideIn {
+      from { transform: translateX(100%); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
     @media (max-width: 768px) {
-      .mobile-menu-btn {
-        display: block;
-      }
-
+      .mobile-menu-btn { display: block; }
       .nav-links {
         display: none;
         position: absolute;
@@ -105,27 +151,22 @@ import { Router } from '@angular/router';
         padding: 1.5rem;
         gap: 1rem;
         box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
-        z-index: 1000;
-        border-top: 1px solid #f1f5f9;
       }
-
-      .nav-links.active {
-        display: flex;
-      }
-
-      .nav-links a, .logout-btn {
-        width: 100%;
-        text-align: left;
-        padding: 0.75rem 0;
-      }
+      .nav-links.active { display: flex; }
     }
   `]
 })
 export class AppComponent {
   isMenuOpen = false;
-  constructor(public authService: AuthService, private router: Router) {}
+  constructor(
+    public authService: AuthService, 
+    private router: Router,
+    public toastService: ToastService
+  ) {}
+
   logout() { 
     this.authService.logout(); 
+    this.toastService.success('Logout realizado com sucesso.');
     this.router.navigate(['/landing']);
   }
 }

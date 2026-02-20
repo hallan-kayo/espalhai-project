@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AdService } from '../services/ad.service';
+import { ToastService } from '../services/toast.service';
 import { LocalidadeService } from '../services/localidade.service';
 import { Router } from '@angular/router';
 
@@ -38,6 +39,7 @@ import { Router } from '@angular/router';
           <div style="margin-bottom: 1.5rem;">
             <label style="display: block; font-size: 0.875rem; font-weight: 700; margin-bottom: 0.5rem; color: #475569;">CATEGORIA</label>
             <select [(ngModel)]="ad.categoria.id" style="width: 100%; padding: 0.85rem; border-radius: 0.75rem; border: 1px solid #cbd5e1;">
+              <option [ngValue]="null">Selecione uma categoria</option>
               <option *ngFor="let cat of categories" [value]="cat.id">{{ cat.nome }}</option>
             </select>
           </div>
@@ -49,22 +51,30 @@ import { Router } from '@angular/router';
 
           <div *ngIf="ad.tipo === 'PRODUTO'" style="margin-bottom: 1.5rem;">
             <label style="display: block; font-size: 0.875rem; font-weight: 700; margin-bottom: 0.5rem; color: #475569;">PREÇO (R$)</label>
-            <input type="number" [(ngModel)]="ad.preco" placeholder="0.00" style="width: 100%; padding: 0.85rem; border-radius: 0.75rem; border: 1px solid #cbd5e1;">
+            <div style="position: relative;">
+              <span style="position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); color: #64748b; font-weight: 600;">R$</span>
+              <input type="number" [(ngModel)]="ad.preco" placeholder="0,00" style="width: 100%; padding: 0.85rem 0.85rem 0.85rem 3rem; border-radius: 0.75rem; border: 1px solid #cbd5e1;">
+            </div>
           </div>
 
           <div *ngIf="ad.tipo === 'SERVICO'" style="margin-bottom: 1.5rem;">
             <label style="display: block; font-size: 0.875rem; font-weight: 700; margin-bottom: 0.5rem; color: #475569;">VALOR DO SERVIÇO (R$)</label>
-            <input type="number" [(ngModel)]="ad.valorServico" placeholder="0.00" style="width: 100%; padding: 0.85rem; border-radius: 0.75rem; border: 1px solid #cbd5e1;">
+            <div style="position: relative;">
+              <span style="position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); color: #64748b; font-weight: 600;">R$</span>
+              <input type="number" [(ngModel)]="ad.valorServico" placeholder="0,00" style="width: 100%; padding: 0.85rem 0.85rem 0.85rem 3rem; border-radius: 0.75rem; border: 1px solid #cbd5e1;">
+            </div>
           </div>
 
           <div *ngIf="ad.tipo === 'VAGA'" style="margin-bottom: 1.5rem;">
             <label style="display: block; font-size: 0.875rem; font-weight: 700; margin-bottom: 0.5rem; color: #475569;">SALÁRIO (R$)</label>
-            <input type="number" [(ngModel)]="ad.salario" placeholder="0.00" style="width: 100%; padding: 0.85rem; border-radius: 0.75rem; border: 1px solid #cbd5e1;">
+            <div style="position: relative;">
+              <span style="position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); color: #64748b; font-weight: 600;">R$</span>
+              <input type="number" [(ngModel)]="ad.salario" placeholder="0,00" style="width: 100%; padding: 0.85rem 0.85rem 0.85rem 3rem; border-radius: 0.75rem; border: 1px solid #cbd5e1;">
+            </div>
           </div>
         </div>
 
         <div style="display: flex; flex-direction: column; gap: 1.5rem;">
-          <!-- Localização via API IBGE -->
           <div style="background: white; padding: 1.5rem; border-radius: 1.5rem; border: 1px solid #e2e8f0; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);">
             <h4 style="margin: 0 0 1.25rem 0; font-size: 0.9rem; font-weight: 800; text-transform: uppercase; color: #64748b; display: flex; align-items: center; gap: 0.5rem;">
               <span class="material-icons" style="font-size: 1.25rem; color: var(--primary-color);">location_on</span>
@@ -88,7 +98,6 @@ import { Router } from '@angular/router';
             </div>
           </div>
 
-          <!-- Imagens -->
           <div style="background: white; padding: 1.5rem; border-radius: 1.5rem; border: 1px solid #e2e8f0; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);">
             <h4 style="margin: 0 0 1.25rem 0; font-size: 0.9rem; font-weight: 800; text-transform: uppercase; color: #64748b; display: flex; align-items: center; gap: 0.5rem;">
               <span class="material-icons" style="font-size: 1.25rem; color: var(--primary-color);">photo_camera</span>
@@ -132,19 +141,33 @@ export class AdCreateComponent implements OnInit {
   ];
 
   constructor(
-    private adService: AdService, 
+    private adService: AdService,
+    private toastService: ToastService,
     private localidadeService: LocalidadeService,
     private router: Router
   ) {}
 
   ngOnInit() {
-    this.adService.getCategories().subscribe(data => {
-      this.categories = data;
-      if (this.categories.length > 0) this.ad.categoria.id = this.categories[0].id;
-    });
+    this.loadCategories();
+    this.localidadeService.getEstados().subscribe(data => this.estados = data);
+  }
 
-    this.localidadeService.getEstados().subscribe(data => {
-      this.estados = data;
+  loadCategories() {
+    this.adService.getCategories().subscribe({
+      next: (data) => {
+        this.categories = data;
+        if (this.categories.length === 0) {
+          // Fallback se não houver categorias no banco
+          this.categories = [{ id: 1, nome: 'Geral' }];
+        }
+        if (this.categories.length > 0 && !this.ad.categoria.id) {
+          this.ad.categoria.id = this.categories[0].id;
+        }
+      },
+      error: () => {
+        this.toastService.error('Erro ao carregar categorias.');
+        this.categories = [{ id: 1, nome: 'Geral' }];
+      }
     });
   }
 
@@ -166,14 +189,26 @@ export class AdCreateComponent implements OnInit {
 
   onFileSelected(event: any) {
     const files = event.target.files;
+    let limitReached = false;
+
     for (let file of files) {
-      if (this.ad.imagens.length < this.maxImages && file.size <= 10 * 1024 * 1024) {
-        const reader = new FileReader();
-        reader.onload = (e: any) => {
-          this.ad.imagens.push(e.target.result);
-        };
-        reader.readAsDataURL(file);
+      if (this.ad.imagens.length < this.maxImages) {
+        if (file.size <= 10 * 1024 * 1024) {
+          const reader = new FileReader();
+          reader.onload = (e: any) => {
+            this.ad.imagens.push(e.target.result);
+          };
+          reader.readAsDataURL(file);
+        } else {
+          this.toastService.error(`A imagem ${file.name} é muito grande (máx 10MB).`);
+        }
+      } else {
+        limitReached = true;
       }
+    }
+
+    if (limitReached) {
+      this.toastService.error(`Você atingiu o limite de ${this.maxImages} fotos para este tipo de anúncio.`);
     }
   }
 
@@ -193,9 +228,14 @@ export class AdCreateComponent implements OnInit {
   }
 
   save() {
-    this.adService.createAd(this.ad).subscribe(() => {
-      alert('Anúncio publicado com sucesso!');
-      this.router.navigate(['/home']);
+    this.adService.createAd(this.ad).subscribe({
+      next: () => {
+        this.toastService.success('Anúncio publicado com sucesso!');
+        this.router.navigate(['/home']);
+      },
+      error: () => {
+        this.toastService.error('Erro ao publicar anúncio. Verifique os campos e tente novamente.');
+      }
     });
   }
 }
