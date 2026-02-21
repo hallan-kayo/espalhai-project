@@ -51,6 +51,10 @@ export class AdService {
     return this.http.get<any[]>(`${this.apiUrl}/user/${userId}/public`);
   }
 
+  getAdById(id: number): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/${id}`);
+  }
+
   getUserPublicProfile(userId: number): Observable<any> {
     return this.http.get<any>(`http://localhost:8080/api/public/user/${userId}`);
   }

@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { AdService } from '../services/ad.service';
 import { ToastService } from '../services/toast.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-profile',
@@ -49,7 +50,12 @@ import { ToastService } from '../services/toast.service';
 
           <div>
             <label style="display: block; font-size: 0.75rem; font-weight: 700; margin-bottom: 0.5rem; color: #475569;">TELEFONE (WhatsApp)</label>
-            <input type="text" [(ngModel)]="user.telefone" name="telefone" placeholder="Ex: 85988887777" style="width: 100%; padding: 0.75rem; border-radius: 0.5rem; border: 1px solid #cbd5e1;">
+            <input type="text" [(ngModel)]="user.telefone" name="telefone" 
+                   (input)="formatarTelefone($event)"
+                   placeholder="(xx) x xxxx-xxxx" 
+                   maxlength="15"
+                   style="width: 100%; padding: 0.75rem; border-radius: 0.5rem; border: 1px solid #cbd5e1;">
+            <small *ngIf="erroTelefone" style="color: #ef4444; font-size: 0.75rem;">Apenas números são permitidos. Formato: (xx) x xxxx-xxxx</small>
           </div>
 
           <div style="grid-column: span 2; margin-top: 1rem;">
@@ -60,13 +66,45 @@ import { ToastService } from '../services/toast.service';
           </div>
 
           <div style="grid-column: span 2;">
-            <label style="display: block; font-size: 0.75rem; font-weight: 700; margin-bottom: 0.5rem; color: #475569;">CIDADE</label>
-            <input type="text" [(ngModel)]="user.cidade" name="cidade" style="width: 100%; padding: 0.75rem; border-radius: 0.5rem; border: 1px solid #cbd5e1;">
+            <label style="display: block; font-size: 0.75rem; font-weight: 700; margin-bottom: 0.5rem; color: #475569;">RUA</label>
+            <input type="text" [(ngModel)]="user.rua" name="rua" style="width: 100%; padding: 0.75rem; border-radius: 0.5rem; border: 1px solid #cbd5e1;">
+          </div>
+
+          <div>
+            <label style="display: block; font-size: 0.75rem; font-weight: 700; margin-bottom: 0.5rem; color: #475569;">NÚMERO</label>
+            <input type="text" [(ngModel)]="user.numero" name="numero" style="width: 100%; padding: 0.75rem; border-radius: 0.5rem; border: 1px solid #cbd5e1;">
+          </div>
+
+          <div>
+            <label style="display: block; font-size: 0.75rem; font-weight: 700; margin-bottom: 0.5rem; color: #475569;">BAIRRO</label>
+            <input type="text" [(ngModel)]="user.bairro" name="bairro" style="width: 100%; padding: 0.75rem; border-radius: 0.5rem; border: 1px solid #cbd5e1;">
           </div>
 
           <div style="grid-column: span 2;">
+            <label style="display: block; font-size: 0.75rem; font-weight: 700; margin-bottom: 0.5rem; color: #475569;">COMPLEMENTO</label>
+            <input type="text" [(ngModel)]="user.complemento" name="complemento" placeholder="Apto, sala, etc." style="width: 100%; padding: 0.75rem; border-radius: 0.5rem; border: 1px solid #cbd5e1;">
+          </div>
+
+          <div>
+            <label style="display: block; font-size: 0.75rem; font-weight: 700; margin-bottom: 0.5rem; color: #475569;">CIDADE</label>
+            <input type="text" [(ngModel)]="user.cidade" name="cidade" 
+                   (input)="buscarCidades($event)"
+                   placeholder="Digite a cidade..."
+                   style="width: 100%; padding: 0.75rem; border-radius: 0.5rem; border: 1px solid #cbd5e1;">
+            <div *ngIf="cidades.length > 0" style="position: absolute; background: white; border: 1px solid #cbd5e1; border-top: none; border-radius: 0 0 0.5rem 0.5rem; width: 48%; z-index: 10; max-height: 200px; overflow-y: auto;">
+              <div *ngFor="let cidade of cidades" 
+                   (click)="selecionarCidade(cidade)"
+                   style="padding: 0.75rem; cursor: pointer; border-bottom: 1px solid #f1f5f9; hover: background: #f8fafc;">
+                {{cidade.nome}} - {{cidade.estado}}
+              </div>
+            </div>
+          </div>
+
+          <div>
             <label style="display: block; font-size: 0.75rem; font-weight: 700; margin-bottom: 0.5rem; color: #475569;">ESTADO</label>
-            <input type="text" [(ngModel)]="user.estado" name="estado" style="width: 100%; padding: 0.75rem; border-radius: 0.5rem; border: 1px solid #cbd5e1;">
+            <input type="text" [(ngModel)]="user.estado" name="estado" 
+                   placeholder="Ex: SP, RJ, MG..."
+                   style="width: 100%; padding: 0.75rem; border-radius: 0.5rem; border: 1px solid #cbd5e1;">
           </div>
 
           <div style="grid-column: span 2; margin-top: 2rem; display: flex; justify-content: flex-end; gap: 1rem;">
@@ -124,11 +162,14 @@ export class ProfileComponent implements OnInit {
   user: any = {};
   myAds: any[] = [];
   activeTab: 'perfil' | 'anuncios' = 'perfil';
+  cidades: any[] = [];
+  erroTelefone = false;
 
   constructor(
     private authService: AuthService,
     private adService: AdService,
-    private toastService: ToastService
+    private toastService: ToastService,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -161,7 +202,52 @@ export class ProfileComponent implements OnInit {
     }
   }
 
+  formatarTelefone(event: any) {
+    let valor = event.target.value.replace(/\D/g, '');
+    this.erroTelefone = false;
+
+    if (valor.length > 11) {
+      this.erroTelefone = true;
+      return;
+    }
+
+    if (valor.length <= 2) {
+      this.user.telefone = valor;
+    } else if (valor.length <= 7) {
+      this.user.telefone = `(${valor.slice(0, 2)}) ${valor.slice(2)}`;
+    } else {
+      this.user.telefone = `(${valor.slice(0, 2)}) ${valor.slice(2, 7)}-${valor.slice(7, 11)}`;
+    }
+  }
+
+  buscarCidades(event: any) {
+    const termo = event.target.value;
+    if (termo.length >= 2) {
+      // Simulação de busca de cidades (em produção, chamar API)
+      this.cidades = [
+        { nome: 'Fortaleza', estado: 'CE' },
+        { nome: 'Caucaia', estado: 'CE' },
+        { nome: 'Maracanaú', estado: 'CE' },
+        { nome: 'São Paulo', estado: 'SP' },
+        { nome: 'Rio de Janeiro', estado: 'RJ' }
+      ].filter(c => c.nome.toLowerCase().includes(termo.toLowerCase()));
+    } else {
+      this.cidades = [];
+    }
+  }
+
+  selecionarCidade(cidade: any) {
+    this.user.cidade = cidade.nome;
+    this.user.estado = cidade.estado;
+    this.cidades = [];
+  }
+
   save() {
+    if (!this.user.telefone || this.user.telefone.replace(/\D/g, '').length !== 11) {
+      this.toastService.error('Telefone inválido. Use o formato (xx) x xxxx-xxxx');
+      return;
+    }
+
     this.authService.updateProfile(this.user).subscribe({
       next: () => this.toastService.success('Perfil atualizado com sucesso!'),
       error: () => this.toastService.error('Erro ao atualizar perfil.')
@@ -193,8 +279,6 @@ export class ProfileComponent implements OnInit {
   }
 
   editAd(ad: any) {
-    // Para simplificar, poderíamos redirecionar para a página de criação passando o ID
-    // Mas para manter o escopo, vamos apenas avisar que a edição está disponível
-    this.toastService.info('Funcionalidade de edição em desenvolvimento.');
+    this.router.navigate(['/ad/create'], { queryParams: { id: ad.id } });
   }
 }

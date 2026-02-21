@@ -56,4 +56,6 @@ public class User {
 
     @Builder.Default
     private boolean ativo = true;
+
+    private LocalDateTime dataCadastro = LocalDateTime.now();
 }

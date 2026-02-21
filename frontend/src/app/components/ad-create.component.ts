@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AdService } from '../services/ad.service';
 import { ToastService } from '../services/toast.service';
 import { LocalidadeService } from '../services/localidade.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-ad-create',
@@ -115,7 +115,7 @@ import { Router } from '@angular/router';
           </div>
 
           <button class="btn-primary" style="width: 100%; padding: 1.25rem; font-size: 1rem; box-shadow: 0 10px 15px -3px rgba(37,99,235,0.3);" [disabled]="!isValid()" (click)="save()">
-            Publicar Anúncio
+            {{ isEditMode ? 'Atualizar Anúncio' : 'Publicar Anúncio' }}
           </button>
         </div>
       </div>
@@ -135,16 +135,43 @@ export class AdCreateComponent implements OnInit {
     { label: '💼 Vaga', value: 'VAGA' }
   ];
 
+  isEditMode = false;
+  editingAdId: number | null = null;
+
   constructor(
     private adService: AdService,
     private toastService: ToastService,
     private localidadeService: LocalidadeService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit() {
     this.loadCategories();
     this.localidadeService.getEstados().subscribe(data => this.estados = data);
+    
+    this.route.queryParams.subscribe(params => {
+      if (params['id']) {
+        this.editingAdId = params['id'];
+        this.isEditMode = true;
+        this.loadAdForEditing(params['id']);
+      }
+    });
+  }
+
+  loadAdForEditing(id: number) {
+    this.adService.getAdById(id).subscribe({
+      next: (data) => {
+        this.ad = { ...data, categoria: { id: data.categoria?.id } };
+        this.onTypeChange();
+        if (this.ad.estado) {
+          this.localidadeService.getCidades(this.ad.estado).subscribe(cidades => {
+            this.cidades = cidades;
+          });
+        }
+      },
+      error: () => this.toastService.error('Erro ao carregar anúncio para edição.')
+    });
   }
 
   loadCategories() {
@@ -228,14 +255,26 @@ export class AdCreateComponent implements OnInit {
   }
 
   save() {
-    this.adService.createAd(this.ad).subscribe({
-      next: () => {
-        this.toastService.success('Anúncio publicado com sucesso!');
-        this.router.navigate(['/home']);
-      },
-      error: () => {
-        this.toastService.error('Erro ao publicar anúncio. Verifique os campos e tente novamente.');
-      }
-    });
+    if (this.isEditMode && this.editingAdId) {
+      this.adService.updateAd(this.editingAdId, this.ad).subscribe({
+        next: () => {
+          this.toastService.success('Anúncio atualizado com sucesso!');
+          this.router.navigate(['/profile']);
+        },
+        error: () => {
+          this.toastService.error('Erro ao atualizar anúncio. Verifique os campos e tente novamente.');
+        }
+      });
+    } else {
+      this.adService.createAd(this.ad).subscribe({
+        next: () => {
+          this.toastService.success('Anúncio publicado com sucesso!');
+          this.router.navigate(['/home']);
+        },
+        error: () => {
+          this.toastService.error('Erro ao publicar anúncio. Verifique os campos e tente novamente.');
+        }
+      });
+    }
   }
 }

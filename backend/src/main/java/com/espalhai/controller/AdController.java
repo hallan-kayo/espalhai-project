@@ -95,4 +95,9 @@ public class AdController {
     public List<Ad> getPublicAdsByUser(@PathVariable Long userId) {
         return adService.getActiveAdsByUser(userId);
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Ad> getAdById(@PathVariable Long id) {
+        return ResponseEntity.ok(adService.getAdById(id));
+    }
 }
