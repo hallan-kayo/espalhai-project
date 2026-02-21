@@ -38,6 +38,19 @@ public class AdController {
         return ResponseEntity.ok(adService.createAd(ad));
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<Ad> updateAd(@PathVariable Long id, @RequestBody Ad ad) {
+        Ad existing = adService.getAdById(id);
+        existing.setTitulo(ad.getTitulo());
+        existing.setDescricao(ad.getDescricao());
+        existing.setValor(ad.getValor());
+        existing.setImagens(ad.getImagens());
+        existing.setCidade(ad.getCidade());
+        existing.setEstado(ad.getEstado());
+        existing.setCategoria(ad.getCategoria());
+        return ResponseEntity.ok(adService.createAd(existing));
+    }
+
     @PutMapping("/{id}/status")
     public ResponseEntity<Ad> updateStatus(@PathVariable Long id, @RequestParam AdStatus status) {
         return ResponseEntity.ok(adService.updateStatus(id, status));
@@ -70,5 +83,16 @@ public class AdController {
                     favoriteRepository.save(Favorite.builder().usuario(user).anuncio(ad).build());
                     return ResponseEntity.ok("Adicionado aos favoritos");
                 });
+    }
+
+    @GetMapping("/me")
+    public List<Ad> getMyAds(Authentication authentication) {
+        User user = userRepository.findByEmail(authentication.getName()).orElseThrow();
+        return adService.getAdsByUser(user.getId());
+    }
+
+    @GetMapping("/user/{userId}/public")
+    public List<Ad> getPublicAdsByUser(@PathVariable Long userId) {
+        return adService.getActiveAdsByUser(userId);
     }
 }

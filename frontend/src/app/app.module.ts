@@ -14,6 +14,7 @@ import { AdminPanelComponent } from './components/admin-panel.component';
 import { ProfileComponent } from './components/profile.component';
 import { LandingPageComponent } from './components/landing-page.component';
 import { FavoritesComponent } from './components/favorites.component';
+import { UserProfileComponent } from './components/user-profile.component';
 import { AuthInterceptor } from './services/auth.interceptor';
 import { inject } from '@angular/core';
 import { AuthService } from './services/auth.service';
@@ -36,6 +37,7 @@ const routes: Routes = [
   { path: 'chat', component: ChatComponent, canActivate: [authGuard] },
   { path: 'admin', component: AdminPanelComponent, canActivate: [authGuard] },
   { path: 'profile', component: ProfileComponent, canActivate: [authGuard] },
+  { path: 'user/:id', component: UserProfileComponent, canActivate: [authGuard] },
   { path: '', redirectTo: '/home', pathMatch: 'full' }
 ];
 
@@ -50,7 +52,8 @@ const routes: Routes = [
     AdminPanelComponent,
     ProfileComponent,
     LandingPageComponent,
-    FavoritesComponent
+    FavoritesComponent,
+    UserProfileComponent
   ],
   imports: [
     BrowserModule,

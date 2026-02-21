@@ -51,6 +51,14 @@ public class AdService {
         return adRepository.findByFilters(categoryId, status, tipo);
     }
 
+    public List<Ad> getAdsByUser(Long userId) {
+        return adRepository.findByUsuarioId(userId);
+    }
+
+    public List<Ad> getActiveAdsByUser(Long userId) {
+        return adRepository.findByUsuarioIdAndStatus(userId, AdStatus.ATIVO);
+    }
+
     public Ad updateStatus(Long id, AdStatus status) {
         Ad ad = adRepository.findById(id).orElseThrow();
         ad.setStatus(status);

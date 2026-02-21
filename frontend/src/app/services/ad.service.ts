@@ -31,8 +31,28 @@ export class AdService {
     return this.http.post(this.apiUrl, ad);
   }
 
+  updateAd(id: number, ad: any): Observable<any> {
+    return this.http.put(`${this.apiUrl}/${id}`, ad);
+  }
+
+  deleteAd(id: number): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/${id}`);
+  }
+
   updateStatus(id: number, status: string): Observable<any> {
     return this.http.put(`${this.apiUrl}/${id}/status`, null, { params: { status } });
+  }
+
+  getMyAds(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/me`);
+  }
+
+  getPublicAdsByUser(userId: number): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/user/${userId}/public`);
+  }
+
+  getUserPublicProfile(userId: number): Observable<any> {
+    return this.http.get<any>(`http://localhost:8080/api/public/user/${userId}`);
   }
 
   getCategories(): Observable<any[]> {

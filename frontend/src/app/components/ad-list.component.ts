@@ -136,14 +136,17 @@ import { ToastService } from '../services/toast.service';
             </div>
 
             <div style="display: flex; justify-content: space-between; align-items: center; padding-top: 30px; border-top: 1px solid #e2e8f0;">
-              <div style="display: flex; align-items: center; gap: 15px;">
+              <div [routerLink]="['/user', selectedAd.usuario?.id]" (click)="closeDetails()" style="display: flex; align-items: center; gap: 15px; cursor: pointer;">
                 <div style="width: 48px; height: 48px; border-radius: 50%; overflow: hidden; background: #e2e8f0; display: flex; align-items: center; justify-content: center;">
                   <img *ngIf="selectedAd.usuario?.fotoBase64" [src]="selectedAd.usuario?.fotoBase64" style="width: 100%; height: 100%; object-fit: cover;">
                   <span *ngIf="!selectedAd.usuario?.fotoBase64" class="material-icons" style="color: #64748b;">person</span>
                 </div>
                 <div>
                   <div style="font-weight: 700; color: #1e293b;">{{selectedAd.usuario?.nome}}</div>
-                  <div style="font-size: 0.875rem; color: #64748b;">Anunciante</div>
+                  <div style="font-size: 0.875rem; color: #64748b; display: flex; align-items: center; gap: 4px;">
+                    Ver perfil completo
+                    <span class="material-icons" style="font-size: 0.9rem;">open_in_new</span>
+                  </div>
                 </div>
               </div>
               <a [routerLink]="['/chat']" [queryParams]="{user: selectedAd.usuario?.id}" style="background: #2563eb; color: white; padding: 15px 30px; border-radius: 12px; font-weight: 700; text-decoration: none; display: flex; align-items: center; gap: 10px;">

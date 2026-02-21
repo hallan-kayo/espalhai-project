@@ -13,4 +13,7 @@ public interface AdRepository extends JpaRepository<Ad, Long> {
     
     @Query("SELECT a FROM Ad a WHERE (:categoryId IS NULL OR a.categoria.id = :categoryId) AND (:status IS NULL OR a.status = :status) AND (:tipo IS NULL OR a.tipo = :tipo)")
     List<Ad> findByFilters(@Param("categoryId") Long categoryId, @Param("status") AdStatus status, @Param("tipo") AdType tipo);
+
+    List<Ad> findByUsuarioId(Long userId);
+    List<Ad> findByUsuarioIdAndStatus(Long userId, AdStatus status);
 }

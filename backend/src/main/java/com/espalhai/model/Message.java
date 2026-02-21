@@ -24,8 +24,14 @@ public class Message {
     @JoinColumn(name = "recipient_id", nullable = false)
     private User destinatario;
 
-    @Column(columnDefinition = "TEXT", nullable = false)
+    @Column(columnDefinition = "TEXT")
     private String conteudo;
+
+    @Column(columnDefinition = "LONGTEXT")
+    private String anexoBase64;
+
+    private String anexoNome;
+    private String anexoTipo; // image/png, application/pdf, etc.
 
     private LocalDateTime timestamp = LocalDateTime.now();
 
